@@ -1,13 +1,19 @@
 # Authors {-}
 
-## Ekarin E. Pongpipat, M.A. {-}
+## Ekarin E. Pongpipat, Ph.D. {-} 
 
-<a href="https://ekarinpongpipat.com/" target="_blank">Ekarin E. Pongpipat</a> is a Ph.D. student studying cognition and neuroscience at The University of Texas at Dallas. He obtained his undergraduate degree in psychology at California State University, Northridge and his master's degree in psychology at San Diego State University. Ekarin has over 5 years of teaching and tutoring experience within statistics. He is also interested in understanding how neural systems change with age.
+<a href="https://orcid.org/0000-0002-8280-3370" target="_blank"><img src="figs/ORCID.svg" height="16"></a> <a href="https://linkedin.com/in/epongpipat/" target="_blank"><img src="figs/LinkedIn.png" height="16"></a>
 
-## Giuseppe G. Miranda, M.S. {-}
+<a href="https://ekarinpongpipat.com/" target="_blank">Ekarin E. Pongpipat</a> is a postdoctoral scientist at The University of Texas at Dallas examining how neural systems change with age. He earned his PhD in Cognition and Neuroscience at The University of Texas at Dallas. He earned his undergraduate degree in psychology at California State University, Northridge and his master's degree in psychology at San Diego State University. Ekarin has over 5 years of teaching and tutoring experience within statistics.
 
-<a href="https://giuseppegmiranda.com/" target="_blank">Giuseppe G. Miranda</a> is a Ph.D. student studying cognition and neuroscience at The University of Texas at Dallas. He obtained his undergraduate degree in psychology at the University of Dayton and his master's degree in applied cognition and neuroscience at The University of Texas at Dallas. He is interested in brain structure, aging, dopamine, and executive function, and also has interests in intervention research on increasing health span via direct methods such as exercise. He also has strong interests in data analysis and statistics. In his free time he enjoys playing basketball, exercising, traveling, and painting.
+## Giuseppe G. Miranda, Ph.D. {-}
 
-## Matthew J. Kmiecik, Ph.D {-}
+<a href="https://www.linkedin.com/in/giuseppe-miranda/" target="_blank"><img src="figs/LinkedIn.png" height="16"></a>
+
+<a href="https://giuseppegmiranda.com/" target="_blank">Giuseppe G. Miranda</a> earned his PhD in Cognition and Neuroscience at The University of Texas at Dallas. He obtained his undergraduate degree in psychology at the University of Dayton and his master's degree in applied cognition and neuroscience at The University of Texas at Dallas. He is interested in brain structure, aging, dopamine, and executive function, and also has interests in intervention research on increasing health span via direct methods such as exercise. He also has strong interests in data analysis and statistics. In his free time he enjoys playing basketball, exercising, traveling, and painting.
+
+## Matthew J. Kmiecik, Ph.D. {-}
+
+<a href="https://orcid.org/0000-0001-5340-3872" target="_blank"><img src="figs/ORCID.svg" height="16"></a> <a href="https://www.linkedin.com/in/matthew-kmiecik-776603b0/" target="_blank"><img src="figs/LinkedIn.png" height="16"></a>
 
 <a href="https://mattkmiecik.com/" target="_blank">Matthew J. Kmiecik</a> is a postdoctoral research fellow at NorthShore University HealthSystem (Evanston Hospital, IL) studying the neural mechanisms underlying multimodal hypersensitivity in chronic pain conditions. He earned his PhD in Cognition and Neuroscience from The University of Texas at Dallas and his BS in Psychology: Natural Sciences from Loyola University Chicago. In his spare time Matt enjoys reading and playing sports.

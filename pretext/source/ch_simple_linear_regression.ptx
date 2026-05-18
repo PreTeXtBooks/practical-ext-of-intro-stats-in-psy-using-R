@@ -3,6 +3,288 @@
   <title>Simple Linear Regression</title>
 
   <p>
-    This placeholder chapter matches the Simple Linear Regression chapter in the original R Markdown book.
+    The first analysis that we will go over is the simple linear regression. Typically, this is one of the last analyses that is taught in introductory statistics in psychology; however, we will go over the simple linear regression first because its steps are essentially identical to the GLM (i.e., OLS regression) and provides a foundation for the GLM framework.
   </p>
+
+  <p>
+    The simple linear regression is typically taught to be used in understanding the relationship between two continuous variables, especially if one can predict the other.
+  </p>
+
+  <p>
+    However, the simple linear regression is a specific case of regression<fn>Specifically, the simple linear regression is a specific case of ordinary least squares (OLS) regression. OLS is one of the several ways that we can calculate the error term.</fn> where variables can actually be either continuous or categorical, the number of predictor variables can be more than one, and causation is not a requirement. Thus, regression is applicable to most data types.
+  </p>
+
+  <p>
+    The simple linear regression is written as:
+    <me>Y = \beta_0 + \beta_1 X + \varepsilon</me>
+    where <m>Y</m> is the dependent (or response) variable, <m>\beta_0</m> is the intercept, <m>\beta_1</m> is the slope, <m>X</m> is the independent (or predictor) variable, and <m>\varepsilon</m> is the error.
+  </p>
+
+  <p>
+    We will use the terms dependent variable (DV) and response variable interchangeably throughout the book. We will also use the terms independent variable (IV) or predictor variable interchangeably.
+  </p>
+
+  <p>
+    <m>\beta</m> represents the true population value, while <m>b</m> represents the unstandardized estimate of the true population value that we will obtain from our analysis. For example, <m>\beta_1</m> represents the true population slope, while <m>b_1</m> represents the unstandardized estimate of the true population slope (or sample).
+  </p>
+
+  <p>
+    Thus, a predicted model (as opposed to the above true hypothesized model) would be written as:
+    <me>\hat{Y} = b_0 + b_1 X</me>
+    where <m>\hat{Y}</m> represents the predicted dependent (or response) variable.
+  </p>
+
+  <p>
+    Both equations should look familiar to the slope-intercept form learned in algebra:
+    <me>y = mx + b</me>
+    where <m>b</m> is the intercept, and <m>m</m> is the slope.
+  </p>
+
+  <p>
+    The intercept and slope have the <term>same</term> meaning as they did in algebra. The intercept represents the value of <m>Y</m> when <m>X</m> is 0, and the slope represents the change in <m>Y</m> (<m>\Delta Y</m>) over the change in <m>X</m> (<m>\Delta X</m>). In other words, the intercept represents the value of the DV when the IV is 0, and the slope represents the change in the DV over the change in the IV.
+  </p>
+
+  <p>
+    Note that the <m>b</m> in the slope-intercept form is not the same and should not be confused with the <m>b</m> in the simple linear regression. The <m>b</m> in the simple linear regression is the slope, while the <m>b</m> in the slope-intercept form is the intercept. Unfortunately, using the same symbol for different terms and using different symbols for the same term is prevalent in statistics.
+  </p>
+
+  <p>
+    For a practical example of the simple linear regression, let's say that we were interested in examining if there is a relationship between the amount of years since a professor has earned their Ph.D. and their salary.
+  </p>
+
+  <p>
+    For this example, we will use the <xref ref="sec-salaries-dataset" text="title"/> dataset.
+  </p>
+
+  <section xml:id="sec-slr-hypotheses">
+    <title>Null and Research Hypotheses</title>
+
+    <p>
+      <md>
+        <mrow>\text{Model: } Salary \amp= \beta_0 + \beta_1\, YearsSincePhD + \varepsilon</mrow>
+        <mrow>H_0\text{: } \beta_1 \amp= 0</mrow>
+        <mrow>H_1\text{: } \beta_1 \amp\ne 0</mrow>
+      </md>
+      where <m>\beta_0</m> is the intercept, <m>\beta_1</m> is the slope, <m>H_0</m> is the null hypothesis and <m>H_1</m> is the research or alternative hypothesis. Typically, the model is written as the hypothesized true model and thus the use of <m>\beta</m> rather than <m>b</m>.
+    </p>
+
+    <p>
+      In this example, the null hypothesis states that the slope is equal to 0, or that there is no relationship between <m>X</m> (years since a professor has earned their Ph.D.) and <m>Y</m> (their 9-month academic salary). (Note: The null hypothesis is sometimes referred to as the nil hypothesis in psychology since we are typically comparing our estimate against 0, or nil).
+    </p>
+
+    <p>
+      The research hypothesis states that the slope is not equal to 0, or that there is a relationship between <m>X</m> (years since a professor has earned their Ph.D.) and <m>Y</m> (their 9-month academic salary).
+    </p>
+
+    <p>
+      The model, null hypothesis, and research hypothesis are identical for both traditional and GLM approaches.
+    </p>
+
+    <p>
+      The intercept can also be tested and its null and research hypotheses are:
+      <md>
+        <mrow>H_0\text{: } \beta_0 \amp= 0</mrow>
+        <mrow>H_1\text{: } \beta_0 \amp\ne 0</mrow>
+      </md>
+      The null hypothesis states that the intercept is equal to 0. In other words, the value of <m>Y</m> (9-month academic salary) when <m>X</m> (years since a professor has earned their Ph.D.) is 0 is not different than 0 ($0). (Note: Zero represents professors who have just earned their Ph.D. up to those who have earned their Ph.D. for less than a year because <c>yrs.since.phd</c> was collected as integers and anything less than a year would be coded as 0.)
+    </p>
+
+    <p>
+      The research hypothesis states that the intercept is not equal to 0. In other words, the value of <m>Y</m> (9-month academic salary) when <m>X</m> (years since a professor has earned their Ph.D.) is 0 is different than 0 ($0).
+    </p>
+
+    <p>
+      Again, the null and research hypotheses are identical for both traditional and GLM approaches.
+    </p>
+  </section>
+
+  <section xml:id="sec-slr-analyses">
+    <title>Statistical Analyses</title>
+
+    <p>
+      To perform the simple linear regression in R, we can use the <c>lm()</c> function.
+    </p>
+
+    <program language="r">
+      <input>
+model &lt;- lm(formula = salary ~ 1 + yrs.since.phd, data = datasetSalaries)
+      </input>
+    </program>
+
+    <p>
+      The first input is the formula of the model, which is the DV, followed by a tilde sign (<c>~</c>), followed by the IV. (Note: 1 is a placeholder for the intercept. The same analysis with identical results can be obtained without the 1. However, we place 1 there to remind us that 1 represents the intercept to gain intuition of the formula).
+    </p>
+
+    <p>
+      In our case, the DV of <c>salary</c> is the first variable, followed by a <c>~</c> and the IV of <c>yrs.since.phd</c>. Notice the similarity between the model and formula. The second input is the dataset (i.e., <c>datasetSalaries</c>).
+    </p>
+
+    <p>
+      We will save the analysis into an object named <c>model</c>. <c>model</c> can be any name and was chosen for simplicity.
+    </p>
+
+    <p>
+      We can obtain the ANOVA source table by using the <c>Anova</c> function within the <c>cars</c> package.
+    </p>
+
+    <program language="r">
+      <input>
+Anova(model, type = 3)
+      </input>
+    </program>
+
+    <p>
+      Note: We prefer the <c>Anova</c> function with a capitol <term>A</term> over the <c>anova</c> function with a lowercase <term>a</term> because we can specify the type of sum of squares. Briefly, the sum of squares in the <c>anova</c> function is type I sums of squares and cannot be changed while we can specify type III sums of squares, which is the default among most statistical softwares, using the <c>Anova</c> function. To learn more about different types of sum of squares, check out Mangiafico's <url href="https://rcompanion.org/rcompanion/d_04.html" visual="rcompanion.org/rcompanion/d_04.html">explanation</url>.
+    </p>
+
+    <subsection xml:id="subsec-slr-read-anova">
+      <title>How Do We Read the ANOVA Source Table?</title>
+
+      <p>
+        We can look at the variable of interest in the first column and read across that particular variable's row for its statistical information.
+      </p>
+
+      <p>
+        For example, let's first examine the statistics associated with the variable <c>(Intercept)</c>. The sums of squares (<c>Sum Sq</c>, which is also abbreviated as <m>SS</m>) associated with the <c>(Intercept)</c> is <c>8.37e+11</c>, the degrees of freedom (<c>Df</c>, specifically, degrees of freedom reduced) is <c>1</c>, the <em>F</em>-statistic (<c>F value</c>) is 1099.71, and the p-value (<c>Pr&gt;F</c>) is <c>&lt; 2.2e-16</c>.
+      </p>
+
+      <p>
+        The <c>F value</c> or <em>F</em>-statistic conceptually provides a ratio of explained to unexplained variability. Explained variability is how much the DV can be explained by IVs while unexplained variability is how much variability is not explained by the IV.
+      </p>
+
+      <p>
+        The mathematical formula of the <em>F</em>-statistic can conceptually be thought of as:
+        <me>F = \frac{\text{explained variability}}{\text{unexplained variability}}</me>
+        Thus, if the IV can't explain any of the variability within the DV, then the <em>F</em>-statistic is less than or equal to 1.
+      </p>
+
+      <p>
+        However, if the IV(s) can explain the DV, the <em>F</em>-statistic will be larger than 1. In other words, the higher the <em>F</em>-statistic, the more the IV(s) explain(s) the variability in the DV compared to its inability to explain the DV.
+      </p>
+
+      <p>
+        Thus, the interpretation of the <em>F</em>-statistic of the <c>(Intercept)</c> is that the <c>(Intercept)</c> can explain the variability in <c>salary</c> <c>1099.71</c> times more than the <c>(Intercept)</c>'s inability to explain the variability in salary.<fn><c>(Intercept)</c>: <me>F = \frac{MSR}{MSE} = \frac{\frac{SSR}{df_R}}{\frac{SSE}{df_E}} = \frac{\frac{8.37 \times 10^{11}}{1}}{\frac{2.99 \times 10^{11}}{395}} = \frac{8.34 \times 10^{11}}{7.58 \times 10^{8}} = 1099.71</me></fn>
+      </p>
+
+      <p>
+        The <c>Pr(&gt;F)</c> or <em>p</em>-value associated with the <c>Intercept</c> is <c>&lt; 2.2e-16</c>. The <em>p</em>-value is the probability of obtaining that particular <em>F</em>-statistic or more extreme assuming that the null hypothesis is true. In other words, the probability of obtaining this <em>F</em>-statistic by chance is extremely small.
+      </p>
+
+      <p>
+        Since <c>yrs.since.phd</c> was our main predictor of interest (and for extra practice), let's also look at the statistics associated with <c>yrs.since.phd</c>.
+      </p>
+
+      <p>
+        The <em>F</em>-statistic associated with <c>yrs.since.phd</c> is <c>84.23</c>, and can be interpreted as <c>yrs.since.phd</c> explains the variability in <c>salary</c> <c>84.23</c> times more than <c>yrs.since.phd</c>'s inability to explain the variability in salary.<fn><c>yrs.since.phd</c>: <me>F = \frac{MSR}{MSE} = \frac{\frac{SSR}{df_R}}{\frac{SSE}{df_E}} = \frac{\frac{6.39 \times 10^{10}}{1}}{\frac{2.99 \times 10^{11}}{395}} = \frac{6.39 \times 10^{10}}{7.58 \times 10^{8}} = 84.23</me></fn>
+      </p>
+
+      <p>
+        The <em>p</em>-value associated with <c>yrs.since.phd</c> is also <c>&lt; 2.2e-16</c> with identical interpretations for the <em>p</em>-value of the <c>(Intercept)</c>.
+      </p>
+
+      <p>
+        We can also obtain the coefficients table by using the <c>summary()</c> function.
+      </p>
+
+      <program language="r">
+        <input>
+summary(model)
+        </input>
+      </program>
+    </subsection>
+
+    <subsection xml:id="subsec-slr-read-coefficients">
+      <title>How Do We Read the Coefficients Table?</title>
+
+      <p>
+        Similarly, we can look at the variable of interest in the first column and read across that particular variable's row for its statistical information.
+      </p>
+
+      <p>
+        Again, let's first take a look at the statistics associated with the <c>(Intercept)</c>. The <c>Estimate</c> of the <c>(Intercept)</c> is <c>91718.7</c>, the standard error (<c>Std. Error</c>) is <c>2765.8</c>, the <em>t</em>-statistic (<c>t value</c>) is <c>33.162</c>, and the <em>p</em>-value (<c>Pr(&gt;|t|)</c>) is <c>&lt; 2e-16</c>.
+      </p>
+
+      <p>
+        The <c>Estimate</c> of the <c>(Intercept)</c> is the predicted intercept value, <m>b_0 = 91718.7</m>. Thus, the predicted <c>salary</c> when <m>yrs.since.phd = 0</m> is $91,718.70. In other words, when a professor has had their Ph.D. for less than a year, their salary is predicted to be $91,718.70.
+      </p>
+
+      <p>
+        The <c>t value</c> or <em>t</em>-statistic is similar to the <em>F</em>-statistic, and can also be conceptually thought of as the ratio of explained variability to unexplained variability. The <em>t</em>-statistic is equal to the square root of the <em>F</em>-statistic when the degrees of freedom is 1<fn><c>(Intercept)</c>: <me>t = \frac{Estimate}{Std.\ Error} = \frac{91718.7}{2765.8} = 33.16</me></fn><fn><c>(Intercept)</c>: <me>t = \sqrt{F} = \sqrt{1099.71} = 33.16</me></fn>. Thus, the <em>t</em>-statistic interpretation is that the <c>(Intercept)</c> explains the variability in <c>salary</c> <c>33.162</c> times more than its inability to explain <c>salary</c>.
+      </p>
+
+      <p>
+        The <em>p</em>-value or <c>Pr(&gt;|t|)</c> of <c>&lt;2e-16</c> is the probability of obtaining that particular <em>t</em>-statistic or a value more extreme than the <em>t</em>-statistic assuming that the null hypothesis is true, which is the same value from the ANOVA source table.
+      </p>
+
+      <p>
+        Let's also examine statistics for <c>yrs.since.phd</c>. The <c>Estimate</c> of <c>yrs.since.phd</c> is <c>985.3</c>, the <c>Std. Error</c> is <c>107.4</c>, the <c>t value</c> is <c>9.18</c>, and the <c>Pr(&gt;|t|)</c> is <c>&lt;2e-16</c>.
+      </p>
+
+      <p>
+        The <c>Estimate</c> of the <c>yrs.since.phd</c> is the estimated slope, <m>b_1 = 985.3</m>. Thus, <c>salary</c> is predicted to change by $985.30 for every 1 unit increase in <c>yrs.since.phd</c><fn><me>b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta DV}{\Delta IV} = \frac{\Delta salary}{\Delta yrs.since.phd} = \frac{985.3}{1} = 985.3</me></fn>. In other words, salary is predicted to increase by $985.30 for every additional year a professor has earned their Ph.D.
+      </p>
+
+      <p>
+        The <em>t</em>-statistic can be interpreted as <c>yrs.since.phd</c> explains the variability in <c>salary</c> 9.18 times more than <c>yrs.since.phd</c>'s inability to explain the variability in <c>salary</c>.
+      </p>
+
+      <p>
+        The <em>p</em>-value of <c>yrs.since.phd</c> is identical to the <em>p</em>-value of the <c>(Intercept)</c> and has identical interpretations.
+      </p>
+
+      <p>
+        Now, if wanted, we can fill in our predicted model, <m>\hat{Y} = b_0 + b_1 X</m>, with the estimates from the coefficients table to predict (or estimate) other values of salary given a certain number of years since a professor has earned their Ph.D.
+        <me>\hat{salary} = b_0 + b_1 \cdot yrs.since.phd = 91718.7 + 985.3 \cdot yrs.since.phd</me>
+        For example, let's say that we were interested in estimating the salary of professors who have worked for 2 years.
+        <me>\hat{salary} = 91718.7 + 985.3 \cdot 2 = 93689.3</me>
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-slr-decision">
+    <title>Statistical Decision</title>
+
+    <p>
+      To determine if <c>yrs.since.phd</c> is statistically significant in predicting <c>salary</c>, we will compare its <em>p</em>-value with the alpha level (<m>\alpha</m>) of <c>0.05</c>. <m>\alpha</m> is the Type I error rate, or the probability that we are incorrectly rejecting the null hypothesis when it is actually true.
+    </p>
+
+    <p>
+      Given that the <em>p</em>-value of <c>&lt;2.2e-16</c> for the <c>yrs.since.phd</c> is less than the alpha level (<m>\alpha</m>) of <c>0.05</c>, we will <term>reject</term> the null hypothesis.
+    </p>
+
+    <p>
+      We can also determine if the intercept is statistically significant. Given that the <c>(Intercept)</c> had an identical <em>p</em>-value, we will also <term>reject</term> the null hypothesis.
+    </p>
+  </section>
+
+  <section xml:id="sec-slr-apa">
+    <title>APA Statement</title>
+
+    <p>
+      A regression was performed to test if the amount of years since obtaining a Ph.D. was related to their salary. The amount of years since obtaining a Ph.D. was significantly related to their salary, <em>b</em> = 985.3, <em>t</em>(395) = 9.18, <em>p</em> &lt; .001. For every passing year that a professor has earned their Ph.D., their salary is estimated to increase by $985.30.
+    </p>
+  </section>
+
+  <section xml:id="sec-slr-visualization">
+    <title>Visualization</title>
+
+    <program language="r">
+      <input>
+ggplot(datasetSalaries, aes(yrs.since.phd, salary)) +
+  geom_point(alpha = 0.25) +
+  geom_smooth(method = "lm", color = "#3182bd") +
+  labs(
+    x = "Years since Ph.D.",
+    y = "9-Month Salary (USD)"
+  ) +
+  scale_y_continuous(labels = dollar) +
+  theme_classic()
+      </input>
+    </program>
+
+    <p>
+      A scatterplot of years since Ph.D. and salary along with the line of best fit. The gray band represents the 95% confidence interval (CI).
+    </p>
+  </section>
+
 </chapter>

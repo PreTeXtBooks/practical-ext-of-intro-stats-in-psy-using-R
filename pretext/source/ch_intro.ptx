@@ -3,6 +3,107 @@
   <title>Introduction</title>
 
   <p>
-    This placeholder chapter matches the Introduction chapter in the original R Markdown book.
+    Typically, introductory univariate statistics courses in psychology cover the following inferential analyses (plus or minus a few more analyses):
   </p>
+
+  <ul>
+    <li><p>One Sample <em>t</em>-test</p></li>
+    <li><p>Dependent Samples <em>t</em>-test</p></li>
+    <li><p>Independent Samples <em>t</em>-test</p></li>
+    <li><p>One-Way Analysis of Variance (ANOVA)</p></li>
+    <li><p>Factorial ANOVA</p></li>
+    <li><p>Correlation</p></li>
+    <li><p>Simple Linear Regression</p></li>
+  </ul>
+
+  <p>
+    These conventions may be useful for quickly talking about a particular statistical analysis with others; however, thinking of these analyses as derivatives (or special cases) of the GLM (i.e., ordinary least squares [OLS] regression) lends itself to understanding more advanced statistical techniques. Given that, the book will provide some evidence along with R code for others to see how the aforementioned analyses can be analyzed within the GLM framework with identical answers. The GLM is not a new idea, but an idea that needs emphasizing.
+  </p>
+
+  <section xml:id="sec-what-is-glm">
+    <title>What exactly is the GLM?</title>
+
+    <p>
+      The general linear model is a unified statistical framework that allows us to think about all of the above analyses (and much more) with a single concise formula:
+    </p>
+
+    <me>Y = \beta X + \varepsilon</me>
+
+    <p>
+      where <m>Y</m> represents a dependent variable (DV) or a set of DVs, <m>\beta</m> represents a set of regression coefficients in addition to the constant, <m>X</m> represents an independent variable (IV) or a set of IVs, and <m>\varepsilon</m> represents the error around the model.
+    </p>
+
+    <p>
+      This should look familiar as the formula is similar to the simple linear regression formula or the slope-intercept form learned in algebra.
+    </p>
+  </section>
+
+  <section xml:id="sec-how-covered">
+    <title>How will this book be covered?</title>
+
+    <p>
+      We will go over each of the typical introductory statistics taught in psychology in five steps:
+    </p>
+
+    <ol>
+      <li><p>State the null and research hypotheses</p></li>
+      <li><p>Perform the statistical analysis in R</p></li>
+      <li><p>Statistical decision <em>(using an alpha (<m>\alpha</m>) = 0.05, two-tailed, which is the arbitrary and ubiquitous convention in psychology)</em><fn>Good read on p-values from the American Statistical Association (ASA): <url href="https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108">https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108</url></fn></p></li>
+      <li><p>APA statement <em>(bare minimum)</em></p></li>
+      <li><p>Visualization</p></li>
+    </ol>
+
+    <p>
+      For each analysis, the traditional approach will be performed first followed by the GLM approach for steps 1 and 2. The goal is to show the similarities and differences between stating the null and research hypotheses in step 1 as well as how the analyses are identical using both approaches in step 2.
+    </p>
+  </section>
+
+  <section xml:id="sec-what-not-covered">
+    <title>What won't this book cover?</title>
+
+    <p>
+      This book won't go into assumptions of the inferential tests or exhaustively its respective formulas.
+      This book will also not exhaustively review data manipulation, transformations, and visualization in R as there are other books that already do this well (e.g., <url href="http://r4ds.had.co.nz/">R for Data Science by Wickham &amp; Grolemund</url>).
+    </p>
+  </section>
+
+  <section xml:id="sec-why-r">
+    <title>Why R?</title>
+
+    <p>
+      We chose to use R to analyze and write this book because R forces us to write out how we performed our analyses (and write helpful comments if we're nice). These codes allow us and others to re-analyze the data exactly as we have. This is not always the case with statistical software that use GUIs.
+    </p>
+  </section>
+
+  <section xml:id="sec-issues-recommendations">
+    <title>Issues and Recommendations</title>
+
+    <p>
+      Hopefully, there aren't any bugs or errors in the book, but you find any issues please report them on our github <url href="https://github.com/epongpipat/practical-ext-of-intro-stats-in-psy-using-R/issues">issues page</url>. This book is also ideally meant to be a live open-source book that can be edited by us and others (you) in perpetuity by creating pull requests on our github <url href="https://github.com/epongpipat/practical-ext-of-intro-stats-in-psy-using-R/pulls">pulls page</url>.
+    </p>
+  </section>
+
+  <section xml:id="sec-license">
+    <title>License</title>
+
+    <sidebyside widths="8% 8% 8% 8%" margins="0%">
+      <image source="https://mirrors.creativecommons.org/presskit/icons/cc.xlarge.png">
+        <description>Attribution</description>
+      </image>
+      <image source="https://mirrors.creativecommons.org/presskit/icons/by.xlarge.png">
+        <description>Attribution</description>
+      </image>
+      <image source="https://mirrors.creativecommons.org/presskit/icons/nc.xlarge.png">
+        <description>Non-Commercial</description>
+      </image>
+      <image source="https://mirrors.creativecommons.org/presskit/icons/sa.xlarge.png">
+        <description>ShareAlike</description>
+      </image>
+    </sidebyside>
+
+    <p>
+      This work is licensed under a <url href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</url>.
+    </p>
+  </section>
+
 </chapter>

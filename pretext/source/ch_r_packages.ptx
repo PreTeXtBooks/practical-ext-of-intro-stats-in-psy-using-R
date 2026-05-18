@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-r-packages" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>R Packages</title>
+
+  <p>
+    This placeholder chapter matches the R Packages chapter in the original R Markdown book.
+  </p>
+</chapter>

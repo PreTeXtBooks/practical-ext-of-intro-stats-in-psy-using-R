@@ -3,6 +3,415 @@
   <title>Datasets</title>
 
   <p>
-    This placeholder chapter matches the Datasets chapter in the original R Markdown book.
+    Below are two public (open-access) and real datasets that we will use for the analyses. For each dataset, you will find its description, minor data wrangling (or data manipulation), and descriptive statistics in both numeric and visual formats.
   </p>
+
+  <section xml:id="sec-salaries-dataset">
+    <title>Salaries Dataset</title>
+
+    <program language="r">
+      <input>
+datasetSalaries &lt;- carData::Salaries
+      </input>
+    </program>
+
+    <p>
+      One of the datasets that we'll use is the <c>Salaries</c> dataset within the <c>carData</c> package. The dataset consists of nine-month salaries collected from 397 collegiate professors in the U.S. during 2008 to 2009. In addition to salaries, the professor's rank, sex, discipline, years since Ph.D., and years of service was also collected. Thus, there is a total of 6 variables, which are described below.
+    </p>
+
+    <tabular halign="left">
+      <row header="yes" bottom="minor">
+        <cell>Variable</cell>
+        <cell>Variable Type</cell>
+        <cell>Description</cell>
+      </row>
+      <row>
+        <cell><c>rank</c></cell>
+        <cell>Categorical</cell>
+        <cell>Professor's rank of either assistant professor, associate professor, or professor</cell>
+      </row>
+      <row>
+        <cell><c>discipline</c></cell>
+        <cell>Categorical</cell>
+        <cell>Type of department the professor works in, either applied or theoretical</cell>
+      </row>
+      <row>
+        <cell><c>yrs.since.phd</c></cell>
+        <cell>Continuous</cell>
+        <cell>Number of years since the professor has obtained their PhD</cell>
+      </row>
+      <row>
+        <cell><c>yrs.service</c></cell>
+        <cell>Continuous</cell>
+        <cell>Number of years the professor has served the department and/or university</cell>
+      </row>
+      <row>
+        <cell><c>sex</c></cell>
+        <cell>Categorical</cell>
+        <cell>Professor's sex of either male or female</cell>
+      </row>
+      <row>
+        <cell><c>salary</c></cell>
+        <cell>Continuous</cell>
+        <cell>Professor's nine-month salary (USD)</cell>
+      </row>
+    </tabular>
+
+    <subsection xml:id="subsec-salaries-wrangling">
+      <title>Data Wrangling</title>
+
+      <p>
+        Before running these analyses within the GLM context, let's clean up the dataset so that it's readable for us rather than computers.
+      </p>
+
+      <program language="r">
+        <input>
+# spell out rank variables
+# rename discipline variables to its meaningful name
+# ensure both rank and discipline are factors
+datasetSalaries &lt;- datasetSalaries %&gt;%
+  mutate(
+    rank = case_when(
+      rank == "AssocProf" ~ "Associate Professor",
+      rank == "AsstProf" ~ "Assistant Professor",
+      rank == "Prof" ~ "Professor"
+    ),
+    discipline = case_when(
+      discipline == "A" ~ "Theoretical",
+      discipline == "B" ~ "Applied"
+    )
+  ) %&gt;%
+  mutate(
+    rank = as.factor(rank),
+    discipline = as.factor(discipline)
+  )
+        </input>
+      </program>
+    </subsection>
+
+    <subsection xml:id="subsec-salaries-descriptives">
+      <title>Descriptive Statistics</title>
+
+      <p>
+        It's also always a good idea to examine the data numerically and visually. Let's first look at the categorical variables then the continuous variables.
+      </p>
+
+      <subsubsection xml:id="subsubsec-salaries-categorical">
+        <title>Categorical Variables</title>
+
+        <program language="r">
+          <input>
+summary(datasetSalaries$rank)
+          </input>
+        </program>
+
+        <p>
+          To visualize our data, we will be using the function <c>ggplot()</c>. We won't be going into detail about plotting since data visualization is out of the book's scope. However, if interested, check out Grolemund's and Wickham's <url href="https://r4ds.had.co.nz/data-visualisation.html" visual="r4ds.had.co.nz/data-visualisation.html">data visualization chapter</url> to learn more about <c>ggplot()</c>.
+        </p>
+
+        <program language="r">
+          <input>
+ggplot(data = datasetSalaries, mapping = aes(x = rank)) +
+  geom_bar(aes(y = stat(count) / sum(stat(count))), color = "black", fill = "#3182bd") +
+  theme_classic() +
+  labs(y = "Proportion", x = "", title = "rank")
+          </input>
+        </program>
+
+        <p>
+          In this dataset, there are a lot more professors than assistant and associate professors combined.
+        </p>
+
+        <program language="r">
+          <input>
+summary(datasetSalaries$discipline)
+          </input>
+        </program>
+
+        <program language="r">
+          <input>
+ggplot(data = datasetSalaries, mapping = aes(x = discipline)) +
+  geom_bar(aes(y = stat(count) / sum(stat(count))), color = "black", fill = "#3182bd") +
+  theme_classic() +
+  labs(y = "Proportion", x = "", title = "discipline")
+          </input>
+        </program>
+
+        <p>
+          There are slightly more professors within the applied than the theoretical discipline (i.e., 35 more).
+        </p>
+
+        <program language="r">
+          <input>
+summary(datasetSalaries$sex)
+          </input>
+        </program>
+
+        <program language="r">
+          <input>
+ggplot(data = datasetSalaries, mapping = aes(x = sex)) +
+  geom_bar(aes(y = stat(count) / sum(stat(count))), color = "black", fill = "#3182bd") +
+  theme_classic() +
+  labs(y = "Proportion", x = "", title = "sex")
+          </input>
+        </program>
+
+        <p>
+          There is a little over 9x as many male professors as there are female professors.
+        </p>
+      </subsubsection>
+
+      <subsubsection xml:id="subsubsec-salaries-continuous">
+        <title>Continuous Variables</title>
+
+        <program language="r">
+          <input>
+datasetSalaries %&gt;%
+  select(yrs.since.phd, yrs.service, salary) %&gt;%
+  describe(.) %&gt;%
+  select(-n, -vars, -trimmed, -mad, -range) %&gt;%
+  round(., 2)
+          </input>
+        </program>
+
+        <program language="r">
+          <input>
+ggplot(datasetSalaries, mapping = aes(yrs.since.phd)) +
+  geom_vline(
+    xintercept = describe(datasetSalaries)["yrs.since.phd", "mean"],
+    alpha = .5,
+    linetype = "dashed"
+  ) +
+  geom_dotplot(binwidth = 1, fill = "#3182bd") +
+  geom_text(aes(
+    x = describe(datasetSalaries)["yrs.since.phd", "mean"],
+    label = paste("M =", round(describe(datasetSalaries)["yrs.since.phd", "mean"], 2)),
+    y = -.05
+  ), angle = 0) +
+  theme_classic() +
+  scale_y_continuous(NULL, breaks = NULL) +
+  labs(x = "", y = "Frequency", title = "Years since PhD")
+          </input>
+        </program>
+
+        <p>
+          On average, professors have had their Ph.D. for about 22 years.
+        </p>
+
+        <program language="r">
+          <input>
+ggplot(data = datasetSalaries, mapping = aes(yrs.service)) +
+  geom_vline(
+    xintercept = describe(datasetSalaries)["yrs.service", "mean"],
+    alpha = .5,
+    linetype = "dashed"
+  ) +
+  geom_dotplot(binwidth = 1, fill = "#3182bd") +
+  geom_text(aes(
+    x = describe(datasetSalaries)["yrs.service", "mean"],
+    label = paste("M =", round(describe(datasetSalaries)["yrs.service", "mean"], 2)),
+    y = -.05
+  ), angle = 0) +
+  theme_classic() +
+  scale_y_continuous(NULL, breaks = NULL) +
+  labs(x = "", y = "Frequency", title = "Years of service")
+          </input>
+        </program>
+
+        <p>
+          On average, professors have provided a service to either the department or university for about 17 years and 7 months.
+        </p>
+
+        <program language="r">
+          <input>
+ggplot(data = datasetSalaries, mapping = aes(x = salary)) +
+  geom_vline(
+    xintercept = describe(datasetSalaries)["salary", "mean"],
+    alpha = .5,
+    linetype = "dashed"
+  ) +
+  geom_dotplot(binwidth = 3000, fill = "#3182bd") +
+  geom_text(aes(
+    x = describe(datasetSalaries)["salary", "mean"],
+    label = paste("M =", scales::dollar(round(describe(datasetSalaries)["salary", "mean"], 2))),
+    y = -.05
+  ), angle = 0) +
+  theme_classic() +
+  scale_y_continuous(NULL, breaks = NULL) +
+  scale_x_continuous(labels = scales::dollar) +
+  labs(x = "", y = "Frequency", title = "salary")
+          </input>
+        </program>
+
+        <p>
+          On average, a professor's 9-month annual income is $113,706.46.
+        </p>
+      </subsubsection>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-anorexia-dataset">
+    <title>Anorexia Dataset</title>
+
+    <program language="r">
+      <input>
+datasetAnorexia &lt;- MASS::anorexia
+      </input>
+    </program>
+
+    <p>
+      Another dataset that we'll use is the <c>anorexia</c> dataset within the <c>MASS</c> package. The dataset consists of the weight (in lbs.) of 72 female patients with anorexia before and after either cognitive behavioral therapy, family therapy, or no therapy (control condition).
+    </p>
+
+    <tabular halign="left">
+      <row header="yes" bottom="minor">
+        <cell>Variable</cell>
+        <cell>Variable Type</cell>
+        <cell>Description</cell>
+      </row>
+      <row>
+        <cell><c>Treatment</c></cell>
+        <cell>Categorical</cell>
+        <cell>Treatment of female patient with anorexia, either cognitive behavioral therapy (CBT), family therapy (FT), or no therapy (CONT)</cell>
+      </row>
+      <row>
+        <cell><c>PreWeight</c></cell>
+        <cell>Continuous</cell>
+        <cell>Weight of female patient with anorexia before treatment in lbs.</cell>
+      </row>
+      <row>
+        <cell><c>PostWeight</c></cell>
+        <cell>Continuous</cell>
+        <cell>Weight of female patient with anorexia after treatment in lbs.</cell>
+      </row>
+    </tabular>
+
+    <subsection xml:id="subsec-anorexia-wrangling">
+      <title>Data Wrangling</title>
+
+      <p>
+        Again, we can make the dataset slightly more readable for us.
+      </p>
+
+      <program language="r">
+        <input>
+# spell out variable names
+# re-order levels to be CBT, FT, then Cont rather than alphabetical order
+datasetAnorexia &lt;- datasetAnorexia %&gt;%
+  mutate(
+    Treatment = Treat,
+    PreWeight = Prewt,
+    PostWeight = Postwt,
+    Treatment = case_when(
+      Treatment == "Cont" ~ "Control",
+      TRUE ~ as.character(Treatment)
+    ),
+    Treatment = factor(Treatment, levels = c("CBT", "FT", "Control"))
+    )
+        </input>
+      </program>
+    </subsection>
+
+    <subsection xml:id="subsec-anorexia-descriptives">
+      <title>Descriptive Statistics</title>
+
+      <subsubsection xml:id="subsubsec-anorexia-categorical">
+        <title>Categorical Variables</title>
+
+        <program language="r">
+          <input>
+summary(datasetAnorexia$Treatment)
+          </input>
+        </program>
+
+        <program language="r">
+          <input>
+ggplot(data = datasetAnorexia, mapping = aes(x = Treatment)) +
+  geom_bar(aes(y = stat(count) / sum(stat(count))), color = "black", fill = "#3182bd") +
+  theme_classic() +
+  labs(y = "Proportion", x = "", title = "Treatment")
+          </input>
+        </program>
+
+        <p>
+          There are more participants within the CBT condition compared to either the FT condition or control group.
+        </p>
+      </subsubsection>
+
+      <subsubsection xml:id="subsubsec-anorexia-continuous">
+        <title>Continuous Variables</title>
+
+        <program language="r">
+          <input>
+datasetAnorexia %&gt;%
+  select(PreWeight, PostWeight) %&gt;%
+  describe(.) %&gt;%
+  select(-vars, -trimmed, -mad, -range) %&gt;%
+  round(., 2)
+          </input>
+        </program>
+
+        <program language="r">
+          <input>
+ggplot(data = datasetAnorexia, mapping = aes(x = PreWeight)) +
+  geom_vline(
+    xintercept = describe(datasetAnorexia)["PreWeight", "mean"],
+    alpha = .5,
+    linetype = "dashed"
+  ) +
+  geom_dotplot(binwidth = 1, fill = "#3182bd") +
+  geom_text(aes(
+    x = describe(datasetAnorexia)["PreWeight", "mean"],
+    label = paste("M =", round(describe(datasetAnorexia)["PreWeight", "mean"], 2)),
+    y = -.05
+  ),
+  angle = 0
+  ) +
+  theme_classic() +
+  scale_y_continuous(NULL, breaks = NULL) +
+  labs(x = "", y = "Frequency", title = "Weight Before Study (lbs)")
+          </input>
+        </program>
+
+        <p>
+          On average, women with anorexia before treatment weighed 82.41 lbs.
+        </p>
+
+        <program language="r">
+          <input>
+ggplot(data = datasetAnorexia, mapping = aes(x = PostWeight)) +
+  geom_vline(
+    xintercept = describe(datasetAnorexia)["PostWeight", "mean"],
+    alpha = .5,
+    linetype = "dashed"
+  ) +
+  geom_dotplot(binwidth = 1, fill = "#3182bd") +
+  geom_text(aes(
+    x = describe(datasetAnorexia)["PostWeight", "mean"],
+    label = paste("M =", round(describe(datasetAnorexia)["PostWeight", "mean"], 2)),
+    y = -.05
+  ),
+  angle = 0
+  ) +
+  theme_classic() +
+  scale_y_continuous(NULL, breaks = NULL) +
+  labs(x = "", y = "Frequency", title = "Weight After Study (lbs)")
+          </input>
+        </program>
+
+        <p>
+          On average, women with anorexia after treatment weighed 85.17 lbs, which is about a 2.76 lbs weight gain compared to before treatment.
+        </p>
+      </subsubsection>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-use-your-own-dataset">
+    <title>Use Your Own Dataset</title>
+
+    <p>
+      However, if you have an interesting dataset of your own, we encourage you to also try using that dataset alongside ours.
+    </p>
+  </section>
+
 </chapter>

@@ -1,8 +1,199 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xml:id="ch-one-sample-t-test" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>One Sample t-Test</title>
+  <title>One Sample <em>t</em>-Test</title>
 
   <p>
-    This placeholder chapter matches the One Sample t-Test chapter in the original R Markdown book.
+    Now that we have gone over the simple linear regression and how the simple linear regression is written and interpreted identically to the GLM (in addition to its standardized counterpart, the correlation), we can begin covering the other statistical analyses in the order they are typically taught.
   </p>
+
+  <p>
+    Let's now go over the one-sample <em>t</em>-test, which compares a sample mean to a population mean (or an <em>a priori</em> value).
+  </p>
+
+  <p>
+    For example, let's say we were interested in determining if the salary of professors was significantly different than the national U.S. median income of $50,221 in 2009.
+  </p>
+
+  <p>
+    For this example, we will again be using the <xref ref="sec-salaries-dataset" text="title"/> dataset.
+  </p>
+
+  <section xml:id="sec-onesamp-hypotheses">
+    <title>Null and Research Hypotheses</title>
+
+    <subsection xml:id="subsec-onesamp-traditional-hypotheses">
+      <title>Traditional Approach</title>
+
+      <p>
+        <md>
+          <mrow>H_0\text{: } \mu \amp= \$50{,}221</mrow>
+          <mrow>H_1\text{: } \mu \amp\ne \$50{,}221</mrow>
+        </md>
+        where <m>\mu</m> represents the population mean.
+      </p>
+
+      <p>
+        The null hypothesis states that there is no difference between the sample and population mean, or equivalently the sample and population mean are equal. The research hypothesis states that there is a difference between the sample and population mean, or equivalently the sample and population mean are not equal.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-onesamp-glm-hypotheses">
+      <title>GLM Approach</title>
+
+      <p>
+        <md>
+          <mrow>\text{Model: } Salary \amp= \beta_0 + \varepsilon</mrow>
+          <mrow>H_0\text{: } \beta_0 \amp= \$50{,}221</mrow>
+          <mrow>H_1\text{: } \beta_0 \amp\ne \$50{,}221</mrow>
+        </md>
+        where <m>\beta_{0}</m> represents the intercept, <m>\varepsilon</m> represents the population error, <m>H_0</m> represents the null hypothesis, and <m>H_1</m> represents the research hypothesis.
+      </p>
+
+      <p>
+        In this particular case, we will not be using the nil hypothesis as we have an <em>a priori</em> comparison of $50,221.
+      </p>
+
+      <p>
+        In the model, when there is no other predictor, the intercept will be the mean. This is because without any other information, the single best number to describe the data is the mean. Thus, the null hypothesis states the intercept (or the mean of 9-month academic salary of professors) is equal to $50,221. The research hypothesis states that the intercept (or the mean 9-month academic salary of professors) is not equal to $50,221.
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-onesamp-analyses">
+    <title>Statistical Analysis</title>
+
+    <subsection xml:id="subsec-onesamp-traditional-analysis">
+      <title>Traditional Approach</title>
+
+      <p>
+        To perform the traditional one-sample <em>t</em>-test, we can use the <c>t.test()</c> function. The first input is the DV of <c>salary</c>, which is again prefixed by the name of the dataset and the dollar sign. The second input is the <em>a priori</em> value (or population value, <m>\mu</m>) that we are interested in testing (i.e., $50,221).
+      </p>
+
+      <program language="r">
+        <input>
+t.test(x = datasetSalaries$salary, mu = 50221)
+        </input>
+      </program>
+
+      <p>
+        From this output, we can see that the <em>t</em>-statistic (<c>t</c>) is <c>41.762</c>, degrees of freedom (<c>df</c>) is <c>396</c>, and the <c>p-value</c> is <c>2.2e-16</c>, with professor's mean salary at $113,706.50. Therefore, professors earn a significantly higher salary compared with the national U.S. median income of $50,221 in 2009.
+      </p>
+
+      <p>
+        The <em>t</em>-statistic and its respective <em>p</em>-value can be interpreted as we previously saw in the <xref ref="ch-simple-linear-regression" text="title"/> chapter. We will spend more time explaining these values in the next section.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-onesamp-glm-analysis">
+      <title>GLM Approach</title>
+
+      <p>
+        Since we have an <em>a priori</em> hypothesis (i.e., median income of $50,221), we will need to first manipulate the DV by point deviating from this <em>a priori</em> value. To do this, we will need to subtract $50,221 from each salary score. Luckily, we can do that directly within the <c>lm()</c> function. We have to point-deviate because the <c>lm()</c> function always tests regression estimates including the intercept against 0 (<m>H_0 = 0</m>). By point deviating from $50,221, we are now asking if the mean of the new point deviated scores is different than 0, where 0 now equals $50,221. To test the intercept, we simply place a <c>1</c> as the predictor.
+      </p>
+
+      <program language="r">
+        <input>
+model &lt;- lm(salary - 50221 ~ 1, datasetSalaries)
+        </input>
+      </program>
+
+      <p>
+        We will again only look at the coefficients table using the <c>summary()</c> function for this test and subsequent <em>t</em>-tests. Although, the ANOVA source table is not typically associated with this test, we could always examine it if desired using the <c>Anova()</c> function.
+      </p>
+
+      <program language="r">
+        <input>
+summary(model)
+        </input>
+      </program>
+
+      <p>
+        Notice that in both approaches the values are identical with respect to the place of rounding. The <em>t</em>-statistic is <c>41.76</c> with <c>396</c> degrees of freedom (df), and the <em>p</em>-value is <c>&lt;2e-16</c>. However, the estimate of the GLM approach is now the sample mean of the point deviated scores. Thus, if we add back $50,221, we will obtain the same sample mean of $113,707.<fn><m>M = \$63{,}486 + \$50{,}221 = \$113{,}707</m></fn>
+      </p>
+
+      <p>
+        Let's go over the <em>t</em>-statistic and <em>p</em>-value to reinforce these concepts.
+      </p>
+
+      <p>
+        Remember that the <em>t</em>-statistic represents the systematic difference compared to the unsystematic difference. In this case, the systematic difference is the difference between professor's mean salary and U.S. median income (i.e., $113,707 - $50,221) and the unsystematic difference is standard error of the mean of the sample (in other words, random variability in the sample).
+      </p>
+
+      <p>
+        Also, the <em>p</em>-value represents the probability of finding a particular <em>t</em>-statistic or <em>t</em>-statistic more extreme assuming that the null hypothesis is true. In this case, the probability of finding a <em>t</em>-statistic of <c>41.76</c> or more extreme is <c>&lt;2.2e-16</c>, which is extremely small and not likely to occur by chance.
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-onesamp-decision">
+    <title>Statistical Decision</title>
+
+    <p>
+      Given that the <em>p</em>-value of <c>2.2e-16</c> is smaller than the alpha level (<m>\alpha</m>) of <c>0.05</c>, we will <term>reject</term> the null hypothesis.
+    </p>
+  </section>
+
+  <section xml:id="sec-onesamp-apa">
+    <title>APA Statement</title>
+
+    <p>
+      A one sample <em>t</em>-test was performed to test if the salary of professors was different than the national U.S. median of $50,221. Professor salaries (<em>M</em> = $113,706.50, <em>SD</em> = $30,289.04) were significantly higher than the national U.S. median income, <em>t</em>(396) = 41.76, <em>p</em> &lt; .001.
+    </p>
+  </section>
+
+  <section xml:id="sec-onesamp-visualization">
+    <title>Visualization</title>
+
+    <program language="r">
+      <input>
+# calculate descriptive statistics along with the 95% CI
+dataset_summary &lt;- datasetSalaries %&gt;%
+  dplyr::summarize(
+    mean = mean(salary),
+    sd = sd(salary),
+    n = n(),
+    sem = sd / sqrt(n),
+    tcrit = abs(qt(0.05 / 2, df = n - 1)),
+    ME = tcrit * sem,
+    LL95CI = mean - ME,
+    UL95CI = mean + ME
+  )
+
+# plot
+ggplot(datasetSalaries, mapping = aes("", salary)) +
+  geom_jitter(alpha = 0.1, width = 0.1) +
+  geom_hline(
+    yintercept = 50221,
+    alpha = .5,
+    linetype = "dashed"
+  ) +
+  geom_errorbar(
+    data = dataset_summary,
+    aes(
+      y = mean,
+      ymin = LL95CI,
+      ymax = UL95CI
+    ),
+    width = 0.01,
+    color = "#3182bd"
+  ) +
+  geom_point(
+    data = dataset_summary, aes("", mean),
+    size = 2,
+    color = "#3182bd"
+  ) +
+  labs(
+    x = "0",
+    y = "9-Month Salary (USD)"
+  ) +
+  theme_classic() +
+  scale_y_continuous(labels = scales::dollar)
+      </input>
+    </program>
+
+    <p>
+      A dot plot of the salary of professors where the dot is the mean salary of professors and the whiskers are the 95% CI. Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.
+    </p>
+  </section>
+
 </chapter>

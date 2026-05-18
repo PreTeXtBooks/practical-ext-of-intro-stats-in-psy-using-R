@@ -3,6 +3,77 @@
   <title>R Packages</title>
 
   <p>
-    This placeholder chapter matches the R Packages chapter in the original R Markdown book.
+    Before we get started, let's make sure to install and load some necessary R packages.
   </p>
+
+  <section xml:id="sec-what-are-packages">
+    <title>What are packages?</title>
+
+    <p>
+      Packages are an organized set of scripts or code that an author has compiled together.
+    </p>
+  </section>
+
+  <section xml:id="sec-packages-list">
+    <title>Packages</title>
+
+    <p>
+      The main packages that we will use throughout the book are:
+    </p>
+
+    <ol>
+      <li><p><c>tidyverse</c> : Data manipulation and visualization</p></li>
+      <li><p><c>psych</c> : Descriptive statistics</p></li>
+      <li><p><c>car</c> : Analysis of Variance (ANOVA) source table with sums of squares type III</p></li>
+      <li><p><c>knitr</c> : Nice, clean-looking tables</p></li>
+      <li><p><c>carData</c> : Open access datasets</p></li>
+      <li><p><c>MASS</c> : Additional open access datasets</p></li>
+      <li><p><c>scales</c>: Convert numbers into dollars</p></li>
+    </ol>
+
+    <p>
+      Note: The description of each package is only a description of how we will use each package. Each package can perform many more functions than described above. We recommend briefly reading them by typing <c>??name of package</c> to read each package's help page (e.g., <c>??psych</c>).
+    </p>
+  </section>
+
+  <section xml:id="sec-install-r-packages">
+    <title>Install R Packages</title>
+
+    <p>
+      To install a package, we can enter the command <c>install.packages("name of package")</c>. For example, to install the <c>psych</c> package, we would type <c>install.packages("psych")</c>.
+    </p>
+
+    <program language="r">
+      <input>
+install.packages("tidyverse")
+install.packages("psych")
+install.packages("car")
+install.packages("knitr")
+install.packages("kableExtra")
+install.packages("carData")
+install.packages("MASS")
+install.packages("scales")
+      </input>
+    </program>
+  </section>
+
+  <section xml:id="sec-load-r-packages">
+    <title>Load R Packages</title>
+
+    <p>
+      To load a package, we can enter the command <c>library(name of package)</c>. For example, to load the <c>psych</c> package, we would type <c>library(psych)</c>. We won't be loading the <c>carData</c> and <c>MASS</c> package as we will be extracting the datasets directly from those packages, which we will go over in the <xref ref="ch-datasets">datasets chapter</xref>.
+    </p>
+
+    <program language="r">
+      <input>
+library(tidyverse)
+library(psych)
+library(car)
+library(knitr)
+library(kableExtra)
+library(scales)
+      </input>
+    </program>
+  </section>
+
 </chapter>

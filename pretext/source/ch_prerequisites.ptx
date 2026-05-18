@@ -2,7 +2,24 @@
 <chapter xml:id="ch-prerequisites" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Prerequisites</title>
 
-  <p>
-    This placeholder chapter matches the Prerequisites chapter in the original R Markdown book.
-  </p>
+  <section xml:id="sec-prereq-knowledge">
+    <title>Knowledge</title>
+
+    <p>
+      This book assumes that readers have taken or have an understanding of introductory univariate statistics in psychology. We will only briefly cover and review some concepts, but the emphasis will be on thinking about these statistics within the perspective of the GLM framework and how to apply it in R. Thus, readers who do not have this knowledge may find this book useful.
+    </p>
+
+    <p>
+      A fantastic book to learn the fundamentals of statistics is <url href="https://www.amazon.com/Data-Analysis-Comparison-Approach-Regression-dp-1138819832/dp/1138819832/ref=mt_paperback?_encoding=UTF8&amp;me=&amp;qid=">Data Analysis by Judd, McClelland, &amp; Ryan</url>.
+    </p>
+  </section>
+
+  <section xml:id="sec-prereq-software">
+    <title>Software</title>
+
+    <p>
+      We will also need <url href="https://cran.r-project.org/mirrors.html">R</url> (the programming language) and <url href="https://www.rstudio.com/products/rstudio/download/">R Studio</url> (an integrated development environment [IDE] for R).
+    </p>
+  </section>
+
 </chapter>

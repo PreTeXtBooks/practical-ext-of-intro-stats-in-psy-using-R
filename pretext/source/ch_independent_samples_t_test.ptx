@@ -1,8 +1,218 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xml:id="ch-independent-samples-t-test" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>Independent Samples t-Test</title>
+  <title>Independent Samples <em>t</em>-Test</title>
 
   <p>
-    This placeholder chapter matches the Independent Samples t-Test chapter in the original R Markdown book.
+    The independent samples <em>t</em>-test compares the means of two different (or independent) samples.
   </p>
+
+  <p>
+    For example, let's say that we were interested in determining if the salary of professors was different depending on whether they were part of an applied or theoretical discipline.
+  </p>
+
+  <p>
+    For this example, we will use the <xref ref="sec-salaries-dataset" text="title"/> data set.
+  </p>
+
+  <section xml:id="sec-indsamp-hypotheses">
+    <title>Null and Research Hypotheses</title>
+
+    <subsection xml:id="subsec-indsamp-traditional-hypotheses">
+      <title>Traditional Approach</title>
+
+      <p>
+        <md>
+          <mrow>H_0\text{: } \mu_{Applied} - \mu_{Theoretical} \amp= 0 \quad \text{or equivalently} \quad \mu_{Applied} = \mu_{Theoretical}</mrow>
+          <mrow>H_1\text{: } \mu_{Applied} - \mu_{Theoretical} \amp\ne 0 \quad \text{or equivalently} \quad \mu_{Applied} \ne \mu_{Theoretical}</mrow>
+        </md>
+      </p>
+
+      <p>
+        The null hypothesis states there is no difference in the salary of professors who are in an applied discipline compared to a theoretical discipline. The research hypothesis states there is a difference in the salary of professors who are in an applied discipline compared to a theoretical discipline.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-indsamp-glm-hypotheses">
+      <title>GLM Approach</title>
+
+      <p>
+        <md>
+          <mrow>\text{Model: } Salary \amp= \beta_0 + \beta_1 \cdot Discipline + \varepsilon</mrow>
+          <mrow>H_0\text{: } \beta_1 \amp= 0</mrow>
+          <mrow>H_1\text{: } \beta_1 \amp\ne 0</mrow>
+        </md>
+      </p>
+
+      <p>
+        In addition to the intercept (<m>\beta_0</m>), we now have a predictor <c>discipline</c> along with its associated slope (<m>\beta_1</m>). In this model, the slope represents the change in <c>salary</c> over the change in <c>discipline</c>, and the intercept (<m>\beta_{0}</m>) represents the value when <c>discipline</c> is 0.
+      </p>
+
+      <p>
+        The null hypothesis states that the slope associated with <c>discipline</c> is equal to zero. In other words, there is no difference in the salary of professors who are in different disciplines. The alternative hypothesis states that the slope associated with <c>discipline</c> is not equal to zero. In other words, there is a difference in the salary of professors that are in different disciplines.
+      </p>
+
+      <p>
+        The interpretation of the slope and intercept depends on how <c>discipline</c> is coded. Thus, it is always a good idea to check how this categorical IV is coded, which can be done using the <c>contrasts()</c> function.
+      </p>
+
+      <program language="r">
+        <input>
+contrasts(datasetSalaries$discipline)
+        </input>
+      </program>
+
+      <p>
+        We can see that <c>Applied</c> is coded as <c>0</c> and <c>Theoretical</c> is coded as <c>1</c>. Given that the difference of the coding scheme of <c>discipline</c> is 1, the slope represents the mean difference in salary for professors that are in theoretical disciplines compared to applied disciplines.<fn><m>b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{1-0} = \frac{\Delta Salary}{1} = \Delta Salary</m></fn> Additionally, the intercept (<m>\beta_{0}</m>) represents the mean salary of professors in the applied discipline since 0 represents <c>Applied</c> in the <c>discipline</c> coding scheme.
+      </p>
+
+      <p>
+        If we wanted to change the coding scheme and code <c>Theoretical</c> as <c>0</c> and <c>Applied</c> as <c>1</c>, then our interpretation of the intercept would be the mean salary of professors in the theoretical discipline since <c>Theoretical</c> is now 0. The slope would still have the same interpretation of the mean difference of salary for professors in different disciplines as the difference in the coding scheme is still 1. However, the sign would change.<fn><m>b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{0-1} = \frac{\Delta Salary}{-1} = -\Delta Salary</m></fn>
+      </p>
+
+      <p>
+        These two types of coding schemes are known as dummy coding, which is R's default coding scheme for categorical variables. Specifically, dummy coding is when one level of an IV is coded as 1 and all others are coded as 0. However, there are other coding schemes such as effects (also known as deviant), helmert, polynomial, and orthogonal. We will also go over coding categorical variables in more detail in the next chapter.
+      </p>
+
+      <p>
+        Our preferred contrast for the independent samples <em>t</em>-test is to use -0.5 for one group and 0.5 for the other group. We prefer this coding scheme because the slope will still provide the mean difference<fn><m>b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{0.5-(-0.5)} = \frac{\Delta Salary}{1} = \Delta Salary</m></fn>; however, since 0 lies in between the two groups, the intercept will now represent the mean of the group means. In this example case, it will be the mean of the mean salary of professors in the applied discipline and the mean salary of professors in the theoretical discipline.
+      </p>
+
+      <p>
+        We recommend assigning the group expected to have a higher value in the dependent variable as 0.5 and the other group as -0.5. In our example, we might expect that those in the applied discipline will have higher salaries and thus assign that group to 0.5, while the theoretical discipline to have lower salaries and thus assign them to -0.5. We can do this by using the concatenate <c>c()</c> function to group the numbers together and assign them back to the contrast. The order inside the <c>c()</c> function must be in alphanumerical order of the levels of the independent variable.
+      </p>
+
+      <program language="r">
+        <input>
+contrasts(datasetSalaries$discipline) &lt;- c(0.5, -0.5)
+contrasts(datasetSalaries$discipline)
+        </input>
+      </program>
+
+      <p>
+        Note: If the difference in <c>discipline</c> was not equal to 1, the estimate would equal the fraction of the difference. For example, if <c>Applied</c> was coded as <c>-1</c> and <c>Theoretical</c> was coded as <c>1</c>, the difference of <c>discipline</c> is now 2 and the estimate would represent half of the salary mean difference.<fn><m>b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{1-(-1)} = \frac{\Delta Salary}{2}</m></fn> Thus, if we multiplied the estimate by 2, we would obtain the mean salary difference. Even though the estimate changes, the <em>t</em>-statistic and <em>p</em>-value will not change as the intercept and error will adjust proportionally to the coding scheme of the categorical IV (as long as they are unique values).
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-indsamp-analyses">
+    <title>Statistical Analysis</title>
+
+    <subsection xml:id="subsec-indsamp-traditional-analysis">
+      <title>Traditional Approach</title>
+
+      <p>
+        To perform the traditional independent samples <em>t</em>-test, we can again use the <c>t.test()</c> function. However, we will now enter the formula of the GLM into the first argument. For this test, we will assume the variances of each group are equal (not significantly different from each other); however, this should be tested.
+      </p>
+
+      <program language="r">
+        <input>
+t.test(datasetSalaries$salary ~ datasetSalaries$discipline, var.equal = TRUE)
+        </input>
+      </program>
+
+      <p>
+        Note: There are other ways to enter the formula into <c>t.test()</c> function depending on how the dataset is formatted.
+      </p>
+
+      <p>
+        From this output we can see that the <em>t</em>-statistic (<c>t</c>) is <c>3.1406</c>, degrees of freedom (<c>df</c>) is <c>395</c>, and <c>p-value</c> is <c>0.001813</c>, with the mean salary of professors in the <c>Applied</c> discipline being $118,028.70 and the mean salary of professors in the <c>Theoretical</c> discipline being $108,548.40. Therefore, professors with <c>Applied</c> disciplines earn significantly higher salaries than professors with <c>Theoretical</c> disciplines.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-indsamp-glm-analysis">
+      <title>GLM Approach</title>
+
+      <program language="r">
+        <input>
+model &lt;- lm(salary ~ 1 + discipline, datasetSalaries)
+        </input>
+      </program>
+
+      <program language="r">
+        <input>
+summary(model)
+        </input>
+      </program>
+
+      <p>
+        Notice that in both analyses, the <em>t</em>-statistic (<c>t value</c>) of <c>-3.14</c> with <c>395</c> degrees of freedom (df), and <em>p</em>-value of <c>.002</c> are identical to the output from the <c>t.test()</c> function.
+      </p>
+
+      <p>
+        We can also see that if we subtract the mean salary for professors in the theoretical discipline from the applied discipline from the <c>t.test()</c> results, we obtain the same mean difference in the <c>estimate</c> in the GLM results (i.e., $118,028.70 - $108,548.40 = $9,480.30).
+      </p>
+
+      <p>
+        Furthermore, we can also see that the intercept is the mean of the mean salary from both those in the applied discipline and theoretical discipline (<m>\frac{118028.70+108548.40}{2} = 113288.50</m>).
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-indsamp-decision">
+    <title>Statistical Decision</title>
+
+    <p>
+      Given the <em>p</em>-value of <c>.002</c> is less than the alpha level (<m>\alpha</m>) of <c>0.05</c>, we will <term>reject</term> the null hypothesis.
+    </p>
+  </section>
+
+  <section xml:id="sec-indsamp-apa">
+    <title>APA Statement</title>
+
+    <p>
+      An independent samples <em>t</em>-test was performed to test if salary of professors was different depending on their discipline. The salary of professors was significantly higher for professors in applied disciplines (<em>M</em> = $118,028.70, <em>SD</em> = $26,831.86) than for professors in theoretical disciplines (<em>M</em> = $108,548.40, <em>SD</em> = $22,968.86), <em>t</em>(395) = -3.14, <em>p</em> = .002.
+    </p>
+  </section>
+
+  <section xml:id="sec-indsamp-visualization">
+    <title>Visualization</title>
+
+    <program language="r">
+      <input>
+# calculate descriptive statistics along with the 95% CI
+dataset_summary &lt;- datasetSalaries %&gt;%
+  mutate(discipline = ifelse(discipline == "Applied", 0.5, -0.5)) %&gt;%
+  group_by(discipline) %&gt;%
+  summarize(
+    mean = mean(salary),
+    sd = sd(salary),
+    n = n(),
+    sem = sd / sqrt(n),
+    tcrit = abs(qt(0.05 / 2, df = n - 1)),
+    ME = tcrit * sem,
+    LL95CI = mean - ME,
+    UL95CI = mean + ME
+  )
+
+mean_of_means &lt;- mean(dataset_summary$mean)
+
+# plot
+datasetSalaries %&gt;%
+  mutate(discipline = ifelse(discipline == "Applied", 0.5, -0.5)) %&gt;%
+  ggplot(., aes(discipline, salary)) +
+    geom_jitter(alpha = 0.1, width = 0.05) +
+    geom_line(data = dataset_summary, aes(x = discipline, y = mean), color = "#3182bd") +
+    geom_errorbar(data = dataset_summary, aes(x = discipline, y = mean, ymin = LL95CI, ymax = UL95CI), width = 0.02, color = "#3182bd") +
+    geom_point(data = dataset_summary, aes(x = discipline, y = mean), size = 3, color = "#3182bd") +
+    geom_point(aes(x = 0, y = mean_of_means), size = 3, color = "#3182bd") +
+    labs(
+      x = "Discipline",
+      y = "9-Month Academic Salary (USD)",
+      caption = ""
+    ) +
+    theme_classic() +
+    scale_y_continuous(
+      labels = scales::dollar
+    ) +
+  scale_x_continuous(breaks = c(-1,-.5,0,.5,1)) +
+  annotate(geom = "text", x = -.5, y = 0, label = "Applied", size = 4) +
+  annotate(geom = "text", x = .5, y = 0, label = "Theoretical", size = 4)
+      </input>
+    </program>
+
+    <p>
+      A dot plot of the 9-month academic salaries of professors that are in applied compared to theoretical disciplines. With respect to each discipline, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points of each group are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.
+    </p>
+  </section>
+
 </chapter>

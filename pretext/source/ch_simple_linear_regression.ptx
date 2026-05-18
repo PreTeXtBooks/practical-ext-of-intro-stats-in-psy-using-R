@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-simple-linear-regression" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Simple Linear Regression</title>
+
+  <p>
+    This placeholder chapter matches the Simple Linear Regression chapter in the original R Markdown book.
+  </p>
+</chapter>

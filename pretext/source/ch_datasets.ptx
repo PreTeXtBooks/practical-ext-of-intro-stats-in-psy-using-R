@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-datasets" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Datasets</title>
+
+  <p>
+    This placeholder chapter matches the Datasets chapter in the original R Markdown book.
+  </p>
+</chapter>

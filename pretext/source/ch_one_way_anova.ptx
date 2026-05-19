@@ -328,10 +328,6 @@ ggplot(datasetSalaries, aes(rank, salary)) +
         </input>
       </program>
 
-      <p>
-        A dot plot of the 9-month academic salaries of professors by their rank within the university (i.e., assistant professor, associate professor, and professor). Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points.
-      </p>
-
       <figure xml:id="fig-one-way-anova-traditional">
         <caption>A dot plot of the 9-month academic salaries of professors by their rank within the university (i.e., assistant professor, associate professor, and professor). Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points.</caption>
         <image source="images/fig-one-way-anova-traditional-1.png">
@@ -397,10 +393,6 @@ ggplot(datasetSalaries_long, aes(value, salary)) +
   theme(strip.background = element_blank())
         </input>
       </program>
-
-      <p>
-        A dot plot of the 9-month academic salaries of professors by their rank within the university. Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points.
-      </p>
 
       <figure xml:id="fig-one-way-anova-orthogonal">
         <caption>A dot plot of the 9-month academic salaries of professors by their rank within the university using orthogonal contrast coding. Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points.</caption>

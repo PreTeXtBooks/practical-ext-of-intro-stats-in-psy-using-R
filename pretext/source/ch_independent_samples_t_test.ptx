@@ -214,10 +214,6 @@ datasetSalaries %&gt;%
       </input>
     </program>
 
-    <p>
-      A dot plot of the 9-month academic salaries of professors that are in applied compared to theoretical disciplines. With respect to each discipline, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points of each group are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.
-    </p>
-
     <figure xml:id="fig-independent-samples-t-test">
       <caption>A dot plot of the 9-month academic salaries of professors that are in applied compared to theoretical disciplines. With respect to each discipline, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points of each group are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.</caption>
       <image source="images/fig-independent-samples-t-test-1.png">

@@ -163,6 +163,13 @@ ggplot(datasetAnorexia, aes("", PostWeight - PreWeight)) +
     <p>
       A dot plot of the weight change of female patients with anorexia before and after the study. The dot is the mean weight change and the bars represent the 95% CI. Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.
     </p>
+
+    <figure xml:id="fig-dependent-samples-t-test">
+      <caption>A dot plot of the weight change of female patients with anorexia before and after the study. The dot is the mean weight change and the bars represent the 95% CI. Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.</caption>
+      <image source="images/fig-dependent-samples-t-test-1.png">
+        <description>A dot plot showing the individual weight difference (PostWeight minus PreWeight) data points jittered along a vertical axis, with a blue dot for the mean weight change, blue whiskers for the 95% CI, and a dashed horizontal line at zero.</description>
+      </image>
+    </figure>
   </section>
 
 </chapter>

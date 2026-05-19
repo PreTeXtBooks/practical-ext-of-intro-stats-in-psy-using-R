@@ -118,6 +118,13 @@ ggplot(data = datasetSalaries, mapping = aes(x = rank)) +
           </input>
         </program>
 
+        <figure xml:id="fig-rank">
+          <caption>Bar chart of the proportion of professors by rank.</caption>
+          <image source="images/figure-rank-1.png">
+            <description>A bar chart showing the proportion of professors classified as assistant professor, associate professor, and professor.</description>
+          </image>
+        </figure>
+
         <p>
           In this dataset, there are a lot more professors than assistant and associate professors combined.
         </p>
@@ -137,6 +144,13 @@ ggplot(data = datasetSalaries, mapping = aes(x = discipline)) +
           </input>
         </program>
 
+        <figure xml:id="fig-discipline">
+          <caption>Bar chart of the proportion of professors by discipline (applied vs. theoretical).</caption>
+          <image source="images/figure-discipline-1.png">
+            <description>A bar chart showing the proportion of professors in applied versus theoretical disciplines.</description>
+          </image>
+        </figure>
+
         <p>
           There are slightly more professors within the applied than the theoretical discipline (i.e., 35 more).
         </p>
@@ -155,6 +169,13 @@ ggplot(data = datasetSalaries, mapping = aes(x = sex)) +
   labs(y = "Proportion", x = "", title = "sex")
           </input>
         </program>
+
+        <figure xml:id="fig-sex">
+          <caption>Bar chart of the proportion of professors by sex.</caption>
+          <image source="images/figure-sex-1.png">
+            <description>A bar chart showing the proportion of female versus male professors.</description>
+          </image>
+        </figure>
 
         <p>
           There is a little over 9x as many male professors as there are female professors.
@@ -198,6 +219,13 @@ ggplot(datasetSalaries, mapping = aes(yrs.since.phd)) +
           </input>
         </program>
 
+        <figure xml:id="fig-yrs-since-phd">
+          <caption>Dot plot of years since professors obtained their Ph.D. The dashed line indicates the mean.</caption>
+          <image source="images/figure-yrs-since-phd-1.png">
+            <description>A dot plot showing the distribution of years since professors obtained their PhD, with a dashed line at the mean of approximately 22 years.</description>
+          </image>
+        </figure>
+
         <p>
           On average, professors have had their Ph.D. for about 22 years.
         </p>
@@ -221,6 +249,13 @@ ggplot(data = datasetSalaries, mapping = aes(yrs.service)) +
   labs(x = "", y = "Frequency", title = "Years of service")
           </input>
         </program>
+
+        <figure xml:id="fig-yrs-service">
+          <caption>Dot plot of years of service by professors. The dashed line indicates the mean.</caption>
+          <image source="images/figure-yrs-service-1.png">
+            <description>A dot plot showing the distribution of years of service by professors, with a dashed line at the mean of approximately 17.6 years.</description>
+          </image>
+        </figure>
 
         <p>
           On average, professors have provided a service to either the department or university for about 17 years and 7 months.
@@ -246,6 +281,13 @@ ggplot(data = datasetSalaries, mapping = aes(x = salary)) +
   labs(x = "", y = "Frequency", title = "salary")
           </input>
         </program>
+
+        <figure xml:id="fig-salary">
+          <caption>Dot plot of professor 9-month salaries (USD). The dashed line indicates the mean.</caption>
+          <image source="images/figure-salary-1.png">
+            <description>A dot plot showing the distribution of professor 9-month salaries in USD, with a dashed line at the mean of approximately $113,706.</description>
+          </image>
+        </figure>
 
         <p>
           On average, a professor's 9-month annual income is $113,706.46.
@@ -337,6 +379,13 @@ ggplot(data = datasetAnorexia, mapping = aes(x = Treatment)) +
           </input>
         </program>
 
+        <figure xml:id="fig-treatment">
+          <caption>Bar chart of the proportion of female anorexia patients by treatment condition (CBT, FT, Control).</caption>
+          <image source="images/figure-treatment-1.png">
+            <description>A bar chart showing the proportion of female anorexia patients by treatment group: cognitive behavioral therapy (CBT), family therapy (FT), and control.</description>
+          </image>
+        </figure>
+
         <p>
           There are more participants within the CBT condition compared to either the FT condition or control group.
         </p>
@@ -381,6 +430,13 @@ ggplot(data = datasetAnorexia, mapping = aes(x = PreWeight)) +
           </input>
         </program>
 
+        <figure xml:id="fig-preweight">
+          <caption>Dot plot of pre-treatment weight (lbs) of female patients with anorexia. The dashed line indicates the mean.</caption>
+          <image source="images/figure-preweight-1.png">
+            <description>A dot plot showing the distribution of pre-treatment weight of female anorexia patients in pounds, with a dashed line at the mean of approximately 82.41 lbs.</description>
+          </image>
+        </figure>
+
         <p>
           On average, women with anorexia before treatment weighed 82.41 lbs.
         </p>
@@ -406,6 +462,13 @@ ggplot(data = datasetAnorexia, mapping = aes(x = PostWeight)) +
   labs(x = "", y = "Frequency", title = "Weight After Study (lbs)")
           </input>
         </program>
+
+        <figure xml:id="fig-postweight">
+          <caption>Dot plot of post-treatment weight (lbs) of female patients with anorexia. The dashed line indicates the mean.</caption>
+          <image source="images/figure-postweight-1.png">
+            <description>A dot plot showing the distribution of post-treatment weight of female anorexia patients in pounds, with a dashed line at the mean of approximately 85.17 lbs.</description>
+          </image>
+        </figure>
 
         <p>
           On average, women with anorexia after treatment weighed 85.17 lbs, which is about a 2.76 lbs weight gain compared to before treatment.

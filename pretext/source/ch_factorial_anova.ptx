@@ -363,6 +363,13 @@ datasetSalaries %&gt;%
     <p>
       A dot plot of the 9-month salaries of professors by their discipline and sex. Respectively for each discipline and sex, the dot represents the mean and the bars represent the 95% CI.
     </p>
+
+    <figure xml:id="fig-factorial-anova">
+      <caption>A dot plot of the 9-month salaries of professors by their discipline and sex. Respectively for each discipline and sex, the dot represents the mean and the bars represent the 95% CI.</caption>
+      <image source="images/fig-factorial-anova-1.png">
+        <description>A dot plot showing individual salary data points grouped by discipline (applied vs. theoretical) and sex (female vs. male), with colored dots for the group means and error bars for the 95% CIs.</description>
+      </image>
+    </figure>
   </section>
 
 </chapter>

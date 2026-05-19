@@ -198,6 +198,13 @@ ggplot(datasetSalaries, mapping = aes("", salary)) +
     <p>
       A dot plot of the salary of professors where the dot is the mean salary of professors and the whiskers are the 95% CI. Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.
     </p>
+
+    <figure xml:id="fig-one-sample-t-test">
+      <caption>A dot plot of the salary of professors where the dot is the mean salary of professors and the whiskers are the 95% CI. Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.</caption>
+      <image source="images/fig-one-sample-t-test-1.png">
+        <description>A dot plot showing individual professor salary data points (jittered) along a vertical axis, with a blue dot for the mean salary, blue whiskers for the 95% confidence interval, and a dashed horizontal line at the a priori value of $50,221.</description>
+      </image>
+    </figure>
   </section>
 
 </chapter>

@@ -331,6 +331,13 @@ ggplot(datasetSalaries, aes(rank, salary)) +
       <p>
         A dot plot of the 9-month academic salaries of professors by their rank within the university (i.e., assistant professor, associate professor, and professor). Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points.
       </p>
+
+      <figure xml:id="fig-one-way-anova-traditional">
+        <caption>A dot plot of the 9-month academic salaries of professors by their rank within the university (i.e., assistant professor, associate professor, and professor). Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points.</caption>
+        <image source="images/fig-one-way-anova-traditional-1.png">
+          <description>A dot plot showing individual salary data points (jittered) grouped by professor rank (assistant, associate, and full professor), with blue dots for group means and blue error bars for 95% confidence intervals.</description>
+        </image>
+      </figure>
     </subsection>
 
     <subsection xml:id="subsec-oneway-viz-orthogonal">
@@ -394,6 +401,13 @@ ggplot(datasetSalaries_long, aes(value, salary)) +
       <p>
         A dot plot of the 9-month academic salaries of professors by their rank within the university. Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points.
       </p>
+
+      <figure xml:id="fig-one-way-anova-orthogonal">
+        <caption>A dot plot of the 9-month academic salaries of professors by their rank within the university using orthogonal contrast coding. Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points.</caption>
+        <image source="images/unnamed-chunk-44-1.png">
+          <description>A faceted dot plot showing salary data by orthogonal contrasts: one panel for the Tenured vs. Assistant Professor contrast and one panel for the Associate vs. Professor contrast, with blue dots for means and blue error bars for 95% CIs.</description>
+        </image>
+      </figure>
     </subsection>
   </section>
 

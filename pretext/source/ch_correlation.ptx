@@ -169,6 +169,13 @@ ggplot(datasetSalaries, aes(yrs.since.phd, salary)) +
       </input>
     </program>
 
+    <figure xml:id="fig-corr-visualization">
+      <caption>A scatterplot of years since Ph.D. and salary along with the line of best fit. The gray band represents the 95% CI. Dual axes show both raw and z-scored values.</caption>
+      <image source="images/unnamed-chunk-23-1.png">
+        <description>A scatterplot showing the positive relationship between years since obtaining a PhD and 9-month salary in USD. Dual axes display both the original scale and z-scored values. The blue line of best fit and gray confidence band are overlaid.</description>
+      </image>
+    </figure>
+
     <p>
       A scatterplot of years since Ph.D. and salary along with the line of best fit. The gray band represents the 95% CI.
     </p>

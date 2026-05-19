@@ -103,6 +103,10 @@ datasetSalaries &lt;- datasetSalaries %&gt;%
           <input>
 summary(datasetSalaries$rank)
           </input>
+          <output>
+## Assistant Professor Associate Professor           Professor 
+##                  67                  64                 266
+          </output>
         </program>
 
         <p>
@@ -133,6 +137,10 @@ ggplot(data = datasetSalaries, mapping = aes(x = rank)) +
           <input>
 summary(datasetSalaries$discipline)
           </input>
+          <output>
+##     Applied Theoretical 
+##         216         181
+          </output>
         </program>
 
         <program language="r">
@@ -159,6 +167,10 @@ ggplot(data = datasetSalaries, mapping = aes(x = discipline)) +
           <input>
 summary(datasetSalaries$sex)
           </input>
+          <output>
+## Female   Male 
+##     39    358
+          </output>
         </program>
 
         <program language="r">
@@ -197,6 +209,12 @@ datasetSalaries %&gt;%
   select(-n, -vars, -trimmed, -mad, -range) %&gt;%
   round(., 2)
           </input>
+          <output>
+##                    mean       sd median   min    max skew kurtosis      se
+## yrs.since.phd     22.31    12.89     21     1     56 0.30    -0.81    0.65
+## yrs.service       17.61    13.01     16     0     60 0.65    -0.34    0.65
+## salary        113706.46 30289.04 107300 57800 231545 0.71     0.18 1520.16
+          </output>
         </program>
 
         <program language="r">
@@ -368,6 +386,10 @@ datasetAnorexia &lt;- datasetAnorexia %&gt;%
           <input>
 summary(datasetAnorexia$Treatment)
           </input>
+          <output>
+##     CBT      FT Control 
+##      29      17      26
+          </output>
         </program>
 
         <program language="r">
@@ -406,6 +428,11 @@ datasetAnorexia %&gt;%
   select(-vars, -trimmed, -mad, -range) %&gt;%
   round(., 2)
           </input>
+          <output>
+##             n  mean   sd median  min   max  skew kurtosis   se
+## PreWeight  72 82.41 5.18  82.30 70.0  94.9 -0.05    -0.16 0.61
+## PostWeight 72 85.17 8.04  84.05 71.3 103.6  0.36    -0.81 0.95
+          </output>
         </program>
 
         <program language="r">

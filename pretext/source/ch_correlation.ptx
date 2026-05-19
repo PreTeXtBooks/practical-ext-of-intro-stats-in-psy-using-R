@@ -69,6 +69,19 @@
         <input>
 cor.test(datasetSalaries$yrs.since.phd, datasetSalaries$salary)
         </input>
+        <output>
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  datasetSalaries$yrs.since.phd and datasetSalaries$salary
+## t = 9.1775, df = 395, p-value &lt; 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.3346160 0.4971402
+## sample estimates:
+##       cor 
+## 0.4192311
+        </output>
       </program>
 
       <p>
@@ -101,6 +114,26 @@ model &lt;- lm(scale(salary) ~ 1 + scale(yrs.since.phd), data = datasetSalaries)
         <input>
 summary(model)
         </input>
+        <output>
+## 
+## Call:
+## lm(formula = scale(salary) ~ 1 + scale(yrs.since.phd), data = datasetSalaries)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.7789 -0.6415 -0.0944  0.5311  3.3802 
+## 
+## Coefficients:
+##                        Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)          -2.446e-17  4.562e-02   0.000        1    
+## scale(yrs.since.phd)  4.192e-01  4.568e-02   9.177   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.909 on 395 degrees of freedom
+## Multiple R-squared:  0.1758, Adjusted R-squared:  0.1737 
+## F-statistic: 84.23 on 1 and 395 DF,  p-value: &lt; 2.2e-16
+        </output>
       </program>
 
       <p>
@@ -123,6 +156,11 @@ summary(model)
         <input>
 confint(model)
         </input>
+        <output>
+##                            2.5 %     97.5 %
+## (Intercept)          -0.08969389 0.08969389
+## scale(yrs.since.phd)  0.32942404 0.50903818
+        </output>
       </program>
 
       <p>

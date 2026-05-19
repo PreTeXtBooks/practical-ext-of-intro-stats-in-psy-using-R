@@ -35,12 +35,22 @@
     <input>
 contrasts(datasetSalaries$discipline)
     </input>
+    <output>
+##             Theoretical
+## Applied               0
+## Theoretical           1
+    </output>
   </program>
 
   <program language="r">
     <input>
 contrasts(datasetSalaries$sex)
     </input>
+    <output>
+##        Male
+## Female    0
+## Male      1
+    </output>
   </program>
 
   <p>
@@ -73,6 +83,11 @@ contrasts(datasetSalaries$discipline) &lt;- cbind(AppliedvTheoretical = c(1 / 2,
     <input>
 contrasts(datasetSalaries$discipline)
     </input>
+    <output>
+##             AppliedvTheoretical
+## Applied                     0.5
+## Theoretical                -0.5
+    </output>
   </program>
 
   <program language="r">
@@ -85,6 +100,11 @@ contrasts(datasetSalaries$sex) &lt;- cbind(FemalevMale = c(-1 / 2, 1 / 2))
     <input>
 contrasts(datasetSalaries$sex)
     </input>
+    <output>
+##        FemalevMale
+## Female        -0.5
+## Male           0.5
+    </output>
   </program>
 
   <section xml:id="sec-factorial-hypotheses">
@@ -197,6 +217,19 @@ model &lt;- aov(salary ~ discipline * sex, datasetSalaries)
         <input>
 Anova(model, type = c("III"))
         </input>
+        <output>
+## Anova Table (Type III tests)
+## 
+## Response: salary
+##                    Sum Sq  Df   F value    Pr(>F)    
+## (Intercept)    1.6139e+12   1 1834.2735 &lt; 2.2e-16 ***
+## discipline     7.9856e+09   1    9.0759  0.002758 ** 
+## sex            7.4307e+09   1    8.4453  0.003867 ** 
+## discipline:sex 1.7395e+09   1    1.9770  0.160492    
+## Residuals      3.4579e+11 393                        
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+        </output>
       </program>
 
       <p>
@@ -234,6 +267,19 @@ model &lt;- lm(salary ~ 1 + discipline * sex, datasetSalaries)
         <input>
 Anova(model, type = c("III"))
         </input>
+        <output>
+## Anova Table (Type III tests)
+## 
+## Response: salary
+##                    Sum Sq  Df   F value    Pr(>F)    
+## (Intercept)    1.6139e+12   1 1834.2735 &lt; 2.2e-16 ***
+## discipline     7.9856e+09   1    9.0759  0.002758 ** 
+## sex            7.4307e+09   1    8.4453  0.003867 ** 
+## discipline:sex 1.7395e+09   1    1.9770  0.160492    
+## Residuals      3.4579e+11 393                        
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+        </output>
       </program>
 
       <p>
@@ -256,6 +302,28 @@ Anova(model, type = c("III"))
         <input>
 summary(model)
         </input>
+        <output>
+## 
+## Call:
+## lm(formula = salary ~ 1 + discipline * sex, data = datasetSalaries)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -52900 -23149  -5419  20505 112785 
+## 
+## Coefficients:
+##                                              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                                    107440       2509  42.828  &lt; 2e-16 ***
+## disciplineAppliedvTheoretical                   15115       5017   3.013  0.00276 ** 
+## sexFemalevMale                                  14580       5017   2.906  0.00387 ** 
+## disciplineAppliedvTheoretical:sexFemalevMale   -14109      10034  -1.406  0.16049    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 29660 on 393 degrees of freedom
+## Multiple R-squared:  0.0482, Adjusted R-squared:  0.04094 
+## F-statistic: 6.634 on 3 and 393 DF,  p-value: 0.0002217
+        </output>
       </program>
 
       <p>

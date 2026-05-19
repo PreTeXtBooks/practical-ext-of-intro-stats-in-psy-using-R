@@ -22,6 +22,12 @@
     <input>
 contrasts(datasetSalaries$rank)
     </input>
+    <output>
+##                     2 3
+## Assistant Professor 0 0
+## Associate Professor 1 0
+## Professor           0 1
+    </output>
   </program>
 
   <section xml:id="sec-coding-categorical-variables">
@@ -105,6 +111,12 @@ contrasts(datasetSalaries$rank) &lt;- cbind(
         <input>
 contrasts(datasetSalaries$rank)
         </input>
+        <output>
+##                     TenuredvAssistant AssociatevProfessor
+## Assistant Professor        -0.6666667                 0.0
+## Associate Professor         0.3333333                -0.5
+## Professor                   0.3333333                 0.5
+        </output>
       </program>
     </subsection>
   </section>
@@ -204,6 +216,17 @@ model &lt;- aov(salary ~ rank, datasetSalaries)
         <input>
 Anova(model, type = c("III"))
         </input>
+        <output>
+## Anova Table (Type III tests)
+## 
+## Response: salary
+##                 Sum Sq  Df F value    Pr(>F)    
+## (Intercept) 2.6481e+12   1 4741.08 &lt; 2.2e-16 ***
+## rank        1.4323e+11   2  128.22 &lt; 2.2e-16 ***
+## Residuals   2.2007e+11 394                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+        </output>
       </program>
 
       <p>
@@ -218,6 +241,18 @@ Anova(model, type = c("III"))
         <input>
 TukeyHSD(model)
         </input>
+        <output>
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = salary ~ rank, data = datasetSalaries)
+## 
+## $rank
+##                                             diff       lwr      upr     p adj
+## Associate Professor-Assistant Professor 13100.45  3382.195 22818.71 0.0046514
+## Professor-Assistant Professor           45996.12 38395.941 53596.31 0.0000000
+## Professor-Associate Professor           32895.67 25154.507 40636.84 0.0000000
+        </output>
       </program>
 
       <p>
@@ -242,6 +277,17 @@ model &lt;- lm(salary ~ 1 + rank, datasetSalaries)
         <input>
 Anova(model, type = c("III"))
         </input>
+        <output>
+## Anova Table (Type III tests)
+## 
+## Response: salary
+##                 Sum Sq  Df F value    Pr(>F)    
+## (Intercept) 2.6481e+12   1 4741.08 &lt; 2.2e-16 ***
+## rank        1.4323e+11   2  128.22 &lt; 2.2e-16 ***
+## Residuals   2.2007e+11 394                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+        </output>
       </program>
 
       <p>
@@ -252,6 +298,27 @@ Anova(model, type = c("III"))
         <input>
 summary(model)
         </input>
+        <output>
+## 
+## Call:
+## lm(formula = salary ~ 1 + rank, data = datasetSalaries)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -68972 -16376  -1580  11755 104773 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)               100475       1459  68.855   &lt;2e-16 ***
+## rankTenuredvAssistant      29548       3323   8.892   &lt;2e-16 ***
+## rankAssociatevProfessor    32896       3290   9.997   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 23630 on 394 degrees of freedom
+## Multiple R-squared:  0.3943, Adjusted R-squared:  0.3912 
+## F-statistic: 128.2 on 2 and 394 DF,  p-value: &lt; 2.2e-16
+        </output>
       </program>
 
       <p>

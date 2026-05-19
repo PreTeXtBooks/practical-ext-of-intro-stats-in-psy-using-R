@@ -73,6 +73,19 @@
         <input>
 t.test(x = datasetSalaries$salary, mu = 50221)
         </input>
+        <output>
+## 
+##  One Sample t-test
+## 
+## data:  datasetSalaries$salary
+## t = 41.762, df = 396, p-value &lt; 2.2e-16
+## alternative hypothesis: true mean is not equal to 50221
+## 95 percent confidence interval:
+##  110717.9 116695.1
+## sample estimates:
+## mean of x 
+##  113706.5
+        </output>
       </program>
 
       <p>
@@ -105,6 +118,23 @@ model &lt;- lm(salary - 50221 ~ 1, datasetSalaries)
         <input>
 summary(model)
         </input>
+        <output>
+## 
+## Call:
+## lm(formula = salary - 50221 ~ 1, data = datasetSalaries)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -55906 -22706  -6406  20479 117839 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)    63486       1520   41.76   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 30290 on 396 degrees of freedom
+        </output>
       </program>
 
       <p>

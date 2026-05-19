@@ -72,6 +72,19 @@
         <input>
 t.test(datasetAnorexia$PostWeight, datasetAnorexia$PreWeight, paired = TRUE)
         </input>
+        <output>
+## 
+##  Paired t-test
+## 
+## data:  datasetAnorexia$PostWeight and datasetAnorexia$PreWeight
+## t = 2.9376, df = 71, p-value = 0.004458
+## alternative hypothesis: true mean difference is not equal to 0
+## 95 percent confidence interval:
+##  0.8878354 4.6399424
+## sample estimates:
+## mean difference 
+##        2.763889
+        </output>
       </program>
 
       <p>
@@ -96,6 +109,23 @@ model &lt;- lm(PostWeight - PreWeight ~ 1, datasetAnorexia)
         <input>
 summary(model)
         </input>
+        <output>
+## 
+## Call:
+## lm(formula = PostWeight - PreWeight ~ 1, data = datasetAnorexia)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -14.964  -4.989  -1.114   6.336  18.736 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)   
+## (Intercept)   2.7639     0.9409   2.938  0.00446 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.984 on 71 degrees of freedom
+        </output>
       </program>
 
       <p>

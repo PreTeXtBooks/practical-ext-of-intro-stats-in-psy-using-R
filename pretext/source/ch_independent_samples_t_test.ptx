@@ -59,6 +59,11 @@
         <input>
 contrasts(datasetSalaries$discipline)
         </input>
+        <output>
+##             Theoretical
+## Applied               0
+## Theoretical           1
+        </output>
       </program>
 
       <p>
@@ -86,6 +91,11 @@ contrasts(datasetSalaries$discipline)
 contrasts(datasetSalaries$discipline) &lt;- c(0.5, -0.5)
 contrasts(datasetSalaries$discipline)
         </input>
+        <output>
+##             [,1]
+## Applied      0.5
+## Theoretical -0.5
+        </output>
       </program>
 
       <p>
@@ -108,6 +118,19 @@ contrasts(datasetSalaries$discipline)
         <input>
 t.test(datasetSalaries$salary ~ datasetSalaries$discipline, var.equal = TRUE)
         </input>
+        <output>
+## 
+##  Two Sample t-test
+## 
+## data:  datasetSalaries$salary by datasetSalaries$discipline
+## t = 3.1406, df = 395, p-value = 0.001813
+## alternative hypothesis: true difference in means between group Applied and group Theoretical is not equal to 0
+## 95 percent confidence interval:
+##   3545.70 15414.83
+## sample estimates:
+##     mean in group Applied mean in group Theoretical 
+##                  118028.7                  108548.4
+        </output>
       </program>
 
       <p>
@@ -132,6 +155,26 @@ model &lt;- lm(salary ~ 1 + discipline, datasetSalaries)
         <input>
 summary(model)
         </input>
+        <output>
+## 
+## Call:
+## lm(formula = salary ~ 1 + discipline, data = datasetSalaries)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -50748 -24611  -4429  19138 113516 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   113289       1509  75.060  &lt; 2e-16 ***
+## discipline1     9480       3019   3.141  0.00181 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 29960 on 395 degrees of freedom
+## Multiple R-squared:  0.02436,    Adjusted R-squared:  0.02189 
+## F-statistic: 9.863 on 1 and 395 DF,  p-value: 0.001813
+        </output>
       </program>
 
       <p>

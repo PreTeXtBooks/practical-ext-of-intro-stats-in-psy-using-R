@@ -16,7 +16,7 @@ datasetSalaries &lt;- carData::Salaries
     </program>
 
     <p>
-      One of the datasets that we'll use is the <c>Salaries</c> dataset within the <c>carData</c> package. The dataset consists of nine-month salaries collected from 397 collegiate professors in the U.S. during 2008 to 2009. In addition to salaries, the professor's rank, sex, discipline, years since Ph.D., and years of service was also collected. Thus, there is a total of 6 variables, which are described below.
+      One of the datasets that we'll use is the <c>Salaries</c> dataset within the <c>carData</c> package <xref ref="ref-fox-weisberg-price"/>. The dataset consists of nine-month salaries collected from 397 collegiate professors in the U.S. during 2008 to 2009. In addition to salaries, the professor's rank, sex, discipline, years since Ph.D., and years of service was also collected. Thus, there is a total of 6 variables, which are described below.
     </p>
 
     <tabular halign="left">
@@ -164,6 +164,10 @@ ggplot(data = datasetSalaries, mapping = aes(x = sex)) +
       <subsubsection xml:id="subsubsec-salaries-continuous">
         <title>Continuous Variables</title>
 
+        <p>
+          We use the <c>describe()</c> function from the <c>psych</c> package <xref ref="ref-revelle-psych"/> and visualization via <c>ggplot2</c> <xref ref="ref-wickham-ggplot2"/> from the <c>tidyverse</c> <xref ref="ref-wickham-tidyverse"/>.
+        </p>
+
         <program language="r">
           <input>
 datasetSalaries %&gt;%
@@ -260,7 +264,7 @@ datasetAnorexia &lt;- MASS::anorexia
     </program>
 
     <p>
-      Another dataset that we'll use is the <c>anorexia</c> dataset within the <c>MASS</c> package. The dataset consists of the weight (in lbs.) of 72 female patients with anorexia before and after either cognitive behavioral therapy, family therapy, or no therapy (control condition).
+      Another dataset that we'll use is the <c>anorexia</c> dataset within the <c>MASS</c> package <xref ref="ref-venables-ripley"/>. The dataset consists of the weight (in lbs.) of 72 female patients with anorexia before and after either cognitive behavioral therapy, family therapy, or no therapy (control condition).
     </p>
 
     <tabular halign="left">
@@ -340,6 +344,10 @@ ggplot(data = datasetAnorexia, mapping = aes(x = Treatment)) +
 
       <subsubsection xml:id="subsubsec-anorexia-continuous">
         <title>Continuous Variables</title>
+
+        <p>
+          We use the <c>describe()</c> function from the <c>psych</c> package <xref ref="ref-revelle-psych"/> and visualization via <c>ggplot2</c> <xref ref="ref-wickham-ggplot2"/> from the <c>tidyverse</c> <xref ref="ref-wickham-tidyverse"/>.
+        </p>
 
         <program language="r">
           <input>

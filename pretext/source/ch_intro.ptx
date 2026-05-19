@@ -48,7 +48,7 @@
     <ol>
       <li><p>State the null and research hypotheses</p></li>
       <li><p>Perform the statistical analysis in R</p></li>
-      <li><p>Statistical decision <em>(using an alpha (<m>\alpha</m>) = 0.05, two-tailed, which is the arbitrary and ubiquitous convention in psychology)</em><fn>Good read on p-values from the American Statistical Association (ASA): <url href="https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108">https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108</url></fn></p></li>
+      <li><p>Statistical decision <em>(using an alpha (<m>\alpha</m>) = 0.05, two-tailed, which is the arbitrary and ubiquitous convention in psychology)</em><fn>Good read on p-values from the American Statistical Association (ASA): <url href="https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108" visual="tandfonline.com">Wasserstein &amp; Lazar (2016)</url> <xref ref="ref-wasserstein-lazar"/>.</fn></p></li>
       <li><p>APA statement <em>(bare minimum)</em></p></li>
       <li><p>Visualization</p></li>
     </ol>
@@ -63,7 +63,7 @@
 
     <p>
       This book won't go into assumptions of the inferential tests or exhaustively its respective formulas.
-      This book will also not exhaustively review data manipulation, transformations, and visualization in R as there are other books that already do this well (e.g., <url href="http://r4ds.had.co.nz/">R for Data Science by Wickham &amp; Grolemund</url>).
+      This book will also not exhaustively review data manipulation, transformations, and visualization in R as there are other books that already do this well (e.g., <url href="http://r4ds.had.co.nz/" visual="r4ds.had.co.nz">R for Data Science</url> by Wickham &amp; Grolemund <xref ref="ref-wickham-r4ds"/>).
     </p>
   </section>
 

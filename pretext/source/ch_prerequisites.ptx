@@ -10,7 +10,7 @@
     </p>
 
     <p>
-      A fantastic book to learn the fundamentals of statistics is <url href="https://www.amazon.com/Data-Analysis-Comparison-Approach-Regression-dp-1138819832/dp/1138819832/ref=mt_paperback?_encoding=UTF8&amp;me=&amp;qid=">Data Analysis by Judd, McClelland, &amp; Ryan</url>.
+      A fantastic book to learn the fundamentals of statistics is <url href="https://www.amazon.com/Data-Analysis-Comparison-Approach-Regression-dp-1138819832/dp/1138819832/ref=mt_paperback?_encoding=UTF8&amp;me=&amp;qid=" visual="amazon.com">Data Analysis</url> by Judd, McClelland, &amp; Ryan <xref ref="ref-judd-mcclelland-ryan"/>.
     </p>
   </section>
 
@@ -18,7 +18,7 @@
     <title>Software</title>
 
     <p>
-      We will also need <url href="https://cran.r-project.org/mirrors.html">R</url> (the programming language) and <url href="https://www.rstudio.com/products/rstudio/download/">R Studio</url> (an integrated development environment [IDE] for R).
+      We will also need <url href="https://cran.r-project.org/mirrors.html" visual="cran.r-project.org">R</url> (the programming language) and <url href="https://www.rstudio.com/products/rstudio/download/" visual="rstudio.com">RStudio</url> (an integrated development environment [IDE] for R).
     </p>
   </section>
 

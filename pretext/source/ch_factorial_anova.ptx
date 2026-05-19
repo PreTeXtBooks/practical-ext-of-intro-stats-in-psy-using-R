@@ -174,7 +174,7 @@ contrasts(datasetSalaries$sex)
       <title>Traditional Approach</title>
 
       <p>
-        To perform a traditional factorial ANOVA, we can again use the <c>aov()</c> function. In the first argument, which is the formula, we can enter the DV followed by the tilde (<c>~</c>) and then the IVs along with its interaction. We can indicate an interaction by placing a colon (<c>:</c>) between the two IVs we want to interact. Specifically, this will create a new interaction term by multiplying the two IVs for each subject.
+        To perform a traditional factorial ANOVA, we can again use the <c>aov()</c> function. In the first argument, which is the formula, we can enter the DV followed by the tilde (<c>~</c>) and then the IVs along with its interaction. We can indicate an interaction by placing a colon (<c>:</c>) between the two IVs we want to interact. Specifically, this will create a new interaction term by multiplying the two IVs for each subject. We use the <c>Anova()</c> function from the <c>car</c> package <xref ref="ref-fox-weisberg-book"/> to obtain type III sums of squares.
       </p>
 
       <program language="r">
@@ -310,6 +310,10 @@ summary(model)
 
   <section xml:id="sec-factorial-visualization">
     <title>Visualization</title>
+
+    <p>
+      The following visualization uses <c>ggplot2</c> <xref ref="ref-wickham-ggplot2"/> from the <c>tidyverse</c> <xref ref="ref-wickham-tidyverse"/>.
+    </p>
 
     <program language="r">
       <input>

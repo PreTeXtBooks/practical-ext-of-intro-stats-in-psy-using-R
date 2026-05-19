@@ -191,7 +191,7 @@ contrasts(datasetSalaries$rank)
       <title>Traditional Approach</title>
 
       <p>
-        To perform a traditional One-Way ANOVA, we can use the <c>aov()</c> function. The first argument in the <c>aov()</c> function is the formula and the second argument is the name of the dataset. Notice that in the formula, we do not have to specify both contrasts because we have already applied the coding scheme directly to the categorical IV of <c>rank</c>.
+        To perform a traditional One-Way ANOVA, we can use the <c>aov()</c> function. The first argument in the <c>aov()</c> function is the formula and the second argument is the name of the dataset. Notice that in the formula, we do not have to specify both contrasts because we have already applied the coding scheme directly to the categorical IV of <c>rank</c>. We will then use the <c>Anova()</c> function from the <c>car</c> package <xref ref="ref-fox-weisberg-book"/> to obtain type III sums of squares.
       </p>
 
       <program language="r">
@@ -290,6 +290,10 @@ summary(model)
 
   <section xml:id="sec-oneway-visualization">
     <title>Visualization</title>
+
+    <p>
+      The following visualizations use <c>ggplot2</c> <xref ref="ref-wickham-ggplot2"/> from the <c>tidyverse</c> <xref ref="ref-wickham-tidyverse"/>.
+    </p>
 
     <subsection xml:id="subsec-oneway-viz-traditional">
       <title>Traditional</title>

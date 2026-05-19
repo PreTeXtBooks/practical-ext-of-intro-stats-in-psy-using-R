@@ -94,7 +94,7 @@ model &lt;- lm(scale(salary) ~ 1 + scale(yrs.since.phd), data = datasetSalaries)
       </p>
 
       <p>
-        The table that most aligns with the correlation output is the coefficients table and not the ANOVA source table, so we will only be using the <c>summary()</c> function for this analysis. However, we could use the <c>Anova()</c> function to obtain the ANOVA source table if desired.
+        The table that most aligns with the correlation output is the coefficients table and not the ANOVA source table, so we will only be using the <c>summary()</c> function for this analysis. However, we could use the <c>Anova()</c> function from the <c>car</c> package <xref ref="ref-fox-weisberg-book"/> to obtain the ANOVA source table if desired.
       </p>
 
       <program language="r">
@@ -149,6 +149,10 @@ confint(model)
 
   <section xml:id="sec-corr-visualization">
     <title>Visualization</title>
+
+    <p>
+      The following visualization uses <c>ggplot2</c> <xref ref="ref-wickham-ggplot2"/> from the <c>tidyverse</c> <xref ref="ref-wickham-tidyverse"/>.
+    </p>
 
     <program language="r">
       <input>

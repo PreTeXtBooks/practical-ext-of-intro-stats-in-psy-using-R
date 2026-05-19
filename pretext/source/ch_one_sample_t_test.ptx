@@ -98,7 +98,7 @@ model &lt;- lm(salary - 50221 ~ 1, datasetSalaries)
       </program>
 
       <p>
-        We will again only look at the coefficients table using the <c>summary()</c> function for this test and subsequent <em>t</em>-tests. Although, the ANOVA source table is not typically associated with this test, we could always examine it if desired using the <c>Anova()</c> function.
+        We will again only look at the coefficients table using the <c>summary()</c> function for this test and subsequent <em>t</em>-tests. Although, the ANOVA source table is not typically associated with this test, we could always examine it if desired using the <c>Anova()</c> function from the <c>car</c> package <xref ref="ref-fox-weisberg-book"/>.
       </p>
 
       <program language="r">
@@ -143,6 +143,10 @@ summary(model)
 
   <section xml:id="sec-onesamp-visualization">
     <title>Visualization</title>
+
+    <p>
+      The following visualization uses <c>ggplot2</c> <xref ref="ref-wickham-ggplot2"/> from the <c>tidyverse</c> <xref ref="ref-wickham-tidyverse"/>.
+    </p>
 
     <program language="r">
       <input>

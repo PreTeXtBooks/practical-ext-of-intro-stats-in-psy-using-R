@@ -3,7 +3,7 @@
   <title>One-Way ANOVA</title>
 
   <p>
-    Next, let's go over the one-way ANOVA, which is used when we have two or more independent groups. Specifically, the one-way ANOVA determines if there is a difference in any of the group level means. Given that the analysis can also be used for two independent groups, this analysis could be used instead of the independent samples <em>t</em>-test.
+    Next, let's go over the one-way ANOVA, which is used when we have two or more independent groups. Specifically, the one-way ANOVA determines if there is a difference in any of the group level means. Given that the analysis can also be used for two independent groups, this analysis could be used instead of the <xref ref="ch-independent-samples-t-test" text="title"/>.
   </p>
 
   <p>

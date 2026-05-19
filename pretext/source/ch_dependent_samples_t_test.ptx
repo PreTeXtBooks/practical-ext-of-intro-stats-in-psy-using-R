@@ -3,7 +3,7 @@
   <title>Dependent Samples <em>t</em>-Test</title>
 
   <p>
-    The dependent samples <em>t</em>-test is essentially the same analysis as the one sample <em>t</em>-test but on a difference score.
+    The dependent samples <em>t</em>-test is essentially the same analysis as the <xref ref="ch-one-sample-t-test" text="title"/> but on a difference score.
   </p>
 
   <p>
@@ -53,7 +53,7 @@
       </p>
 
       <p>
-        Just like in the one sample <em>t</em>-test, the intercept (<m>\beta_{0}</m>) represents the sample mean. However, in this case, the sample mean is the mean of the weight difference of the female patients with anorexia before and after the study. Thus, the intercept here is testing if the sample mean of the weight difference score is significantly different than 0 with identical null and research hypotheses.
+        Just like in the <xref ref="ch-one-sample-t-test" text="title"/>, the intercept (<m>\beta_{0}</m>) represents the sample mean. However, in this case, the sample mean is the mean of the weight difference of the female patients with anorexia before and after the study. Thus, the intercept here is testing if the sample mean of the weight difference score is significantly different than 0 with identical null and research hypotheses.
       </p>
     </subsection>
   </section>

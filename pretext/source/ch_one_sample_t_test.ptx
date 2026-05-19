@@ -3,7 +3,7 @@
   <title>One Sample <em>t</em>-Test</title>
 
   <p>
-    Now that we have gone over the simple linear regression and how the simple linear regression is written and interpreted identically to the GLM (in addition to its standardized counterpart, the correlation), we can begin covering the other statistical analyses in the order they are typically taught.
+    Now that we have gone over the <xref ref="ch-simple-linear-regression" text="title"/> and how the simple linear regression is written and interpreted identically to the GLM (in addition to its standardized counterpart, the <xref ref="ch-correlation" text="title"/>), we can begin covering the other statistical analyses in the order they are typically taught.
   </p>
 
   <p>

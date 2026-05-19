@@ -3,7 +3,7 @@
   <title>Factorial ANOVA</title>
 
   <p>
-    The factorial ANOVA, which tests more than one categorical IV, is an extension of the one-way ANOVA, which only tests one categorical IV. We can also think of the one-way ANOVA as a special case of the factorial ANOVA. In addition to testing the main effects of the categorical IV, the factorial ANOVA also tests the interactions of the categorical IVs.
+    The factorial ANOVA, which tests more than one categorical IV, is an extension of the <xref ref="ch-one-way-anova" text="title"/>, which only tests one categorical IV. We can also think of the one-way ANOVA as a special case of the factorial ANOVA. In addition to testing the main effects of the categorical IV, the factorial ANOVA also tests the interactions of the categorical IVs.
   </p>
 
   <p>

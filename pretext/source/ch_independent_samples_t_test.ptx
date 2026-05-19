@@ -70,7 +70,7 @@ contrasts(datasetSalaries$discipline)
       </p>
 
       <p>
-        These two types of coding schemes are known as dummy coding, which is R's default coding scheme for categorical variables. Specifically, dummy coding is when one level of an IV is coded as 1 and all others are coded as 0. However, there are other coding schemes such as effects (also known as deviant), helmert, polynomial, and orthogonal. We will also go over coding categorical variables in more detail in the <xref ref="sec-coding-categorical-variables" text="title"/> section of the <xref ref="ch-one-way-anova" text="title"/> chapter.
+        These two types of coding schemes are known as dummy coding, which is R's default coding scheme for categorical variables. Specifically, dummy coding is when one level of an IV is coded as 1 and all others are coded as 0. However, there are other coding schemes such as effects (also known as deviant), helmert, polynomial, and orthogonal. We will also go over coding categorical variables in more detail in <xref ref="sec-coding-categorical-variables" text="title"/> of the <xref ref="ch-one-way-anova" text="title"/>.
       </p>
 
       <p>

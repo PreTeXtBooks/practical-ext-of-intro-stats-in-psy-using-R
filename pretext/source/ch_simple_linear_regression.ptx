@@ -2,6 +2,7 @@
 <chapter xml:id="ch-simple-linear-regression" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Simple Linear Regression</title>
 
+  <introduction>
   <p>
     The first analysis that we will go over is the simple linear regression. Typically, this is one of the last analyses that is taught in introductory statistics in psychology; however, we will go over the simple linear regression first because its steps are essentially identical to the GLM (i.e., OLS regression) and provides a foundation for the GLM framework.
   </p>
@@ -55,6 +56,7 @@
   <p>
     For this example, we will use the <xref ref="sec-salaries-dataset" text="title"/> dataset.
   </p>
+  </introduction>
 
   <section xml:id="sec-slr-hypotheses">
     <title>Null and Research Hypotheses</title>

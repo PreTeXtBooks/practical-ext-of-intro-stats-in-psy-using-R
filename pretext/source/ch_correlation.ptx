@@ -2,6 +2,7 @@
 <chapter xml:id="ch-correlation" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Correlation</title>
 
+  <introduction>
   <p>
     The next analysis that we will go over is the correlation. The correlation and simple linear regression are similar with the only difference being that the estimate of the slope of the correlation is standardized, while the estimate of the slope of the simple linear regression is unstandardized.
   </p>
@@ -17,6 +18,7 @@
   <p>
     Given that the simple linear regression and correlation are similar, we can use the same example from the <xref ref="ch-simple-linear-regression" text="title"/> chapter, where we were interested in determining if there was a relationship (or correlation) between the number of years since a professor has had their Ph.D. and their salary. We will be using the same <xref ref="sec-salaries-dataset" text="title"/> dataset to facilitate comparisons.
   </p>
+  </introduction>
 
   <section xml:id="sec-corr-hypotheses">
     <title>Null and Research Hypotheses</title>

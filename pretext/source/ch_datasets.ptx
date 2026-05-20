@@ -2,9 +2,11 @@
 <chapter xml:id="ch-datasets" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Datasets</title>
 
+  <introduction>
   <p>
     Below are two public (open-access) and real datasets that we will use for the analyses. For each dataset, you will find its description, minor data wrangling (or data manipulation), and descriptive statistics in both numeric and visual formats.
   </p>
+  </introduction>
 
   <section xml:id="sec-salaries-dataset">
     <title>Salaries Dataset</title>

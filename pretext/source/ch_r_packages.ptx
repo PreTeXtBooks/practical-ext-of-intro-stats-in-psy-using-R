@@ -2,9 +2,11 @@
 <chapter xml:id="ch-r-packages" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>R Packages</title>
 
+  <introduction>
   <p>
     Before we get started, let's make sure to install and load some necessary R packages.
   </p>
+  </introduction>
 
   <section xml:id="sec-what-are-packages">
     <title>What are packages?</title>

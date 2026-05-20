@@ -2,6 +2,7 @@
 <chapter xml:id="ch-factorial-anova" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Factorial ANOVA</title>
 
+  <introduction>
   <p>
     The factorial ANOVA, which tests more than one categorical IV, is an extension of the <xref ref="ch-one-way-anova" text="title"/>, which only tests one categorical IV. We can also think of the one-way ANOVA as a special case of the factorial ANOVA. In addition to testing the main effects of the categorical IV, the factorial ANOVA also tests the interactions of the categorical IVs.
   </p>
@@ -106,6 +107,7 @@ contrasts(datasetSalaries$sex)
 ## Male           0.5
     </output>
   </program>
+  </introduction>
 
   <section xml:id="sec-factorial-hypotheses">
     <title>Null and Research Hypotheses</title>

@@ -4,9 +4,12 @@
 
   <appendix xml:id="back-acknowledgements">
     <title>Acknowledgements</title>
-    <p>
-      We would like to thank the rstats community for sharing and documenting code, Maria Boylan for pushing an initial blog idea into this book, and Linh Lazarus for editing an earlier version of the project.
-    </p>
+    <p>We would like to thank:</p>
+    <ul>
+      <li><p>The <url href="https://twitter.com/hashtag/rstats?src=hash" visual="twitter.com">#rstats</url> community for sharing and documenting code (inspiration for this book).</p></li>
+      <li><p>Maria Boylan for pushing me to explain more, which turned an initial blog idea into this book.</p></li>
+      <li><p><url href="https://github.com/praxling" visual="github.com/praxling">Linh Lazarus (@praxling)</url> for editing an earlier version of this when it was only a blog post.</p></li>
+    </ul>
   </appendix>
 
   <appendix xml:id="back-authors">
@@ -15,34 +18,38 @@
     <section xml:id="author-ekarin">
       <title>Ekarin E. Pongpipat, Ph.D.</title>
       <p>
-        Ekarin E. Pongpipat is a postdoctoral scientist at The University of Texas at Dallas examining how neural systems change with age. He earned his PhD in Cognition and Neuroscience at The University of Texas at Dallas and has more than five years of teaching and tutoring experience in statistics.
+        <url href="https://ekarinpongpipat.com/" visual="ekarinpongpipat.com">Ekarin E. Pongpipat</url> is a postdoctoral scientist at The University of Texas at Dallas examining how neural systems change with age. He earned his PhD in Cognition and Neuroscience at The University of Texas at Dallas. He earned his undergraduate degree in psychology at California State University, Northridge and his master's degree in psychology at San Diego State University. Ekarin has over 5 years of teaching and tutoring experience within statistics.
       </p>
     </section>
 
     <section xml:id="author-giuseppe">
       <title>Giuseppe G. Miranda, Ph.D.</title>
       <p>
-        Giuseppe G. Miranda earned his PhD in Cognition and Neuroscience at The University of Texas at Dallas. His interests include brain structure, aging, dopamine, executive function, intervention research, data analysis, and statistics.
+        <url href="https://giuseppegmiranda.com/" visual="giuseppegmiranda.com">Giuseppe G. Miranda</url> earned his PhD in Cognition and Neuroscience at The University of Texas at Dallas. He obtained his undergraduate degree in psychology at the University of Dayton and his master's degree in applied cognition and neuroscience at The University of Texas at Dallas. He is interested in brain structure, aging, dopamine, and executive function, and also has interests in intervention research on increasing health span via direct methods such as exercise. He also has strong interests in data analysis and statistics. In his free time he enjoys playing basketball, exercising, traveling, and painting.
       </p>
     </section>
 
     <section xml:id="author-matthew">
       <title>Matthew J. Kmiecik, Ph.D.</title>
       <p>
-        Matthew J. Kmiecik is a postdoctoral research fellow at NorthShore University HealthSystem studying neural mechanisms underlying multimodal hypersensitivity in chronic pain conditions. He earned his PhD in Cognition and Neuroscience from The University of Texas at Dallas.
+        <url href="https://mattkmiecik.com/" visual="mattkmiecik.com">Matthew J. Kmiecik</url> is a postdoctoral research fellow at NorthShore University HealthSystem (Evanston Hospital, IL) studying the neural mechanisms underlying multimodal hypersensitivity in chronic pain conditions. He earned his PhD in Cognition and Neuroscience from The University of Texas at Dallas and his BS in Psychology: Natural Sciences from Loyola University Chicago. In his spare time Matt enjoys reading and playing sports.
       </p>
     </section>
   </appendix>
 
   <references xml:id="back-references">
     <title>References</title>
+    <biblio xml:id="ref-judd-mcclelland-ryan" type="raw">Charles M. Judd, Gary H. McClelland, and Carey S. Ryan. 2017. Data Analysis: A Model Comparison Approach to Regression, ANOVA, and Beyond. Third Edition. New York: Routledge. ISBN 978-1138819832. https://www.amazon.com/Data-Analysis-Comparison-Approach-Regression/dp/1138819832.</biblio>
     <biblio xml:id="ref-r-core-team" type="raw">R Core Team. 2019. R: A Language and Environment for Statistical Computing. Vienna, Austria: R Foundation for Statistical Computing. https://www.R-project.org/.</biblio>
+    <biblio xml:id="ref-wickham-r4ds" type="raw">Hadley Wickham and Garrett Grolemund. 2017. R for Data Science: Import, Tidy, Transform, Visualize, and Model Data. O'Reilly Media. ISBN 978-1491910399. http://r4ds.had.co.nz/.</biblio>
+    <biblio xml:id="ref-wickham-ggplot2" type="raw">Hadley Wickham. 2016. ggplot2: Elegant Graphics for Data Analysis. Second Edition. Springer. ISBN 978-3319242750. https://ggplot2.tidyverse.org.</biblio>
     <biblio xml:id="ref-wickham-tidyverse" type="raw">Hadley Wickham. 2017. tidyverse: Easily Install and Load the Tidyverse. R package version 1.2.1. https://CRAN.R-project.org/package=tidyverse.</biblio>
     <biblio xml:id="ref-wickham-scales" type="raw">Hadley Wickham. 2018. scales: Scale Functions for Visualization. R package version 1.0.0. https://CRAN.R-project.org/package=scales.</biblio>
     <biblio xml:id="ref-fox-weisberg-book" type="raw">John Fox and Sanford Weisberg. 2011. An R Companion to Applied Regression, Second Edition. Thousand Oaks, CA: Sage. http://socserv.socsci.mcmaster.ca/jfox/Books/Companion.</biblio>
     <biblio xml:id="ref-fox-weisberg-price" type="raw">John Fox, Sanford Weisberg, and Brad Price. 2018. carData: Companion to Applied Regression Data Sets. R package version 3.0-2. https://CRAN.R-project.org/package=carData.</biblio>
     <biblio xml:id="ref-revelle-psych" type="raw">Revelle, W. 2018. psych: Procedures for Personality and Psychological Research. Northwestern University, Evanston, Illinois, USA. https://CRAN.R-project.org/package=psych. Version 1.8.12.</biblio>
     <biblio xml:id="ref-venables-ripley" type="raw">Venables, W. N. and Ripley, B. D. 2002. Modern Applied Statistics with S. Fourth Edition. Springer, New York. ISBN 0-387-95457-0.</biblio>
+    <biblio xml:id="ref-wasserstein-lazar" type="raw">Ronald L. Wasserstein and Nicole A. Lazar. 2016. The ASA's Statement on p-Values: Context, Process, and Purpose. The American Statistician 70(2):129–133. https://doi.org/10.1080/00031305.2016.1154108.</biblio>
     <biblio xml:id="ref-xie-knitr-book" type="raw">Yihui Xie. 2014. knitr: A Comprehensive Tool for Reproducible Research. In Implementing Reproducible Computational Research, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman and Hall/CRC. ISBN 978-1466561595.</biblio>
     <biblio xml:id="ref-xie-dynamic-docs" type="raw">Yihui Xie. 2015. Dynamic Documents with R and knitr. Second edition. Chapman and Hall/CRC. ISBN 978-1498716963.</biblio>
     <biblio xml:id="ref-xie-bookdown-book" type="raw">Yihui Xie. 2016. bookdown: Authoring Books and Technical Documents with R Markdown. Chapman and Hall/CRC. ISBN 978-1138700109.</biblio>

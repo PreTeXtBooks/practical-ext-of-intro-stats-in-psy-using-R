@@ -1,8 +1,201 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xml:id="ch-dependent-samples-t-test" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>Dependent Samples t-Test</title>
+  <title>Dependent Samples <em>t</em>-Test</title>
 
   <p>
-    This placeholder chapter matches the Dependent Samples t-Test chapter in the original R Markdown book.
+    The dependent samples <em>t</em>-test is essentially the same analysis as the <xref ref="ch-one-sample-t-test" text="title"/> but on a difference score.
   </p>
+
+  <p>
+    For example, let's say that we were interested in determining if the weight of female patients with anorexia changed before the study compared to after the study.
+  </p>
+
+  <p>
+    For this example, we will be using the <xref ref="sec-anorexia-dataset" text="title"/> dataset.
+  </p>
+
+  <p>
+    We use a difference score because the measures of weight are dependent on (or relate to) each other as they come from the same individual. In other words, weights from the same individual are more likely to be closer in value than weights between individuals. If we do not take this dependence (i.e., positive dependence) into account, the <em>t</em>-value will be artificially inflated (or higher than it should be). Thus, we are also more likely to artificially reduce the <em>p</em>-value and ultimately commit a Type I error.
+  </p>
+
+  <p>
+    In other cases, not properly accounting for the dependence of measures can artificially reduce the <em>t</em>-value if the measures are negatively dependent. Measuring responsibility of household chores in couples is an example of negative dependence because as one couple rates their household chore responsibility as high or low, the other couple will typically rate the opposite. In other words, the measures of responsibility of household chores are more likely to be different within couples than the responsibility of household chores between couples. The artificially reduced <em>t</em>-value would increase the <em>p</em>-value and are ultimately likely to commit a Type II error.
+  </p>
+
+  <section xml:id="sec-depsamp-hypotheses">
+    <title>Null and Research Hypotheses</title>
+
+    <subsection xml:id="subsec-depsamp-traditional-hypotheses">
+      <title>Traditional Approach</title>
+
+      <p>
+        <md>
+          <mrow>H_0\text{: } \mu_{WeightDifference} \amp= 0</mrow>
+          <mrow>H_1\text{: } \mu_{WeightDifference} \amp\ne 0</mrow>
+        </md>
+      </p>
+
+      <p>
+        The null hypothesis states that there is no weight difference in female patients with anorexia before and after the study. The research hypothesis states there is a weight difference in female patients with anorexia before and after the study.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-depsamp-glm-hypotheses">
+      <title>GLM Approach</title>
+
+      <p>
+        <md>
+          <mrow>\text{Model: } WeightDifference \amp= \beta_0 + \varepsilon</mrow>
+          <mrow>H_0\text{: } \beta_0 \amp= 0</mrow>
+          <mrow>H_1\text{: } \beta_0 \amp\ne 0</mrow>
+        </md>
+        where <m>\beta_0</m> represents the intercept and <m>\varepsilon</m> represents the error.
+      </p>
+
+      <p>
+        Just like in the <xref ref="ch-one-sample-t-test" text="title"/>, the intercept (<m>\beta_{0}</m>) represents the sample mean. However, in this case, the sample mean is the mean of the weight difference of the female patients with anorexia before and after the study. Thus, the intercept here is testing if the sample mean of the weight difference score is significantly different than 0 with identical null and research hypotheses.
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-depsamp-analyses">
+    <title>Statistical Analysis</title>
+
+    <subsection xml:id="subsec-depsamp-traditional-analysis">
+      <title>Traditional Approach</title>
+
+      <p>
+        To perform the traditional dependent samples <em>t</em>-test, we can again use the <c>t.test()</c> function. However, we will also set the <c>paired</c> option to <c>TRUE</c>.
+      </p>
+
+      <program language="r">
+        <input>
+t.test(datasetAnorexia$PostWeight, datasetAnorexia$PreWeight, paired = TRUE)
+        </input>
+        <output>
+## 
+##  Paired t-test
+## 
+## data:  datasetAnorexia$PostWeight and datasetAnorexia$PreWeight
+## t = 2.9376, df = 71, p-value = 0.004458
+## alternative hypothesis: true mean difference is not equal to 0
+## 95 percent confidence interval:
+##  0.8878354 4.6399424
+## sample estimates:
+## mean difference 
+##        2.763889
+        </output>
+      </program>
+
+      <p>
+        From this output, we can see that the <em>t</em>-statistic (<c>t</c>) is <c>2.9376</c>, degrees of freedom (<c>df</c>) is <c>71</c>, and the <c>p-value</c> is <c>0.004458</c>.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-depsamp-glm-analysis">
+      <title>GLM Approach</title>
+
+      <p>
+        For the DV, we will input the difference of weight before and after treatment (i.e., <c>PostWeight-PreWeight</c>) directly into the <c>lm()</c> function. Since we are testing the intercept, we will again place <c>1</c> as the predictor.
+      </p>
+
+      <program language="r">
+        <input>
+model &lt;- lm(PostWeight - PreWeight ~ 1, datasetAnorexia)
+        </input>
+      </program>
+
+      <program language="r">
+        <input>
+summary(model)
+        </input>
+        <output>
+## 
+## Call:
+## lm(formula = PostWeight - PreWeight ~ 1, data = datasetAnorexia)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -14.964  -4.989  -1.114   6.336  18.736 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)   
+## (Intercept)   2.7639     0.9409   2.938  0.00446 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.984 on 71 degrees of freedom
+        </output>
+      </program>
+
+      <p>
+        Notice that in both analyses the sample mean difference of <c>2.76</c>, the <em>t</em>-statistic of <c>2.94</c> with <c>71</c> degrees of freedom (df), and the <em>p</em>-value of <c>.004</c> are identical with respect to place of rounding.
+      </p>
+
+      <p>
+        In this case, the systematic difference of the <em>t</em>-statistic is the difference in weight before and after a study and the unsystematic difference is standard error of the mean of the differences (in other words, random variability of the difference scores).
+      </p>
+
+      <p>
+        In this case, the probability of finding a <em>t</em>-statistic of <c>2.94</c> or more extreme is <c>.004</c>, which is very small and not likely to occur by chance if the null hypothesis was true.
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-depsamp-decision">
+    <title>Statistical Decision</title>
+
+    <p>
+      Given the <em>p</em>-value of <c>0.004</c> is smaller than the alpha level (<m>\alpha</m>) of <c>0.05</c>, we will <term>reject</term> the null hypothesis.
+    </p>
+  </section>
+
+  <section xml:id="sec-depsamp-apa">
+    <title>APA Statement</title>
+
+    <p>
+      A dependent samples <em>t</em>-test was performed to test if female patients with anorexia had changed their weight before and after the study. The female patients with anorexia significantly gained weight after the study (<em>M</em> = 85.17, <em>SD</em> = 14.51) compared to before the study (<em>M</em> = 82.41, <em>SD</em> = 5.18), <em>t</em>(71) = 2.94, <em>p</em> = .004.
+    </p>
+  </section>
+
+  <section xml:id="sec-depsamp-visualization">
+    <title>Visualization</title>
+
+    <p>
+      The following visualization uses <c>ggplot2</c> <xref ref="ref-wickham-ggplot2"/> from the <c>tidyverse</c> <xref ref="ref-wickham-tidyverse"/>.
+    </p>
+
+    <program language="r">
+      <input>
+# calculate descriptive statistics along with the 95% CI
+dataset_summary &lt;- datasetAnorexia %&gt;%
+  summarize(
+    mean = mean(PostWeight - PreWeight),
+    sd = sd(PostWeight - PreWeight),
+    n = n(),
+    sem = sd / sqrt(n),
+    tcrit = abs(qt(0.05 / 2, df = n - 1)),
+    ME = tcrit * sem,
+    LL95CI = mean - ME,
+    UL95CI = mean + ME
+  )
+
+ggplot(datasetAnorexia, aes("", PostWeight - PreWeight)) +
+  geom_hline(yintercept = 0, alpha = .1, linetype = "dashed") +
+  geom_jitter(alpha = 0.25, width = 0.02) +
+  geom_errorbar(data = dataset_summary, aes(y = mean, ymin = LL95CI, ymax = UL95CI), width = 0.01, color = "#3182bd") +
+  geom_point(data = dataset_summary, aes("", mean), size = 3, color = "#3182bd") +
+  labs(x = 0, y = "Weight Difference (lbs)") +
+  theme_classic()
+      </input>
+    </program>
+
+    <figure xml:id="fig-dependent-samples-t-test">
+      <caption>A dot plot of the weight change of female patients with anorexia before and after the study. The dot is the mean weight change and the bars represent the 95% CI. Note: The data points are actually only on a single line on the x-axis. They are only jittered (dispersed) for easier visualization of all data points.</caption>
+      <image source="images/fig-dependent-samples-t-test-1.png">
+        <description>A dot plot showing the individual weight difference (PostWeight minus PreWeight) data points jittered along a vertical axis, with a blue dot for the mean weight change, blue whiskers for the 95% CI, and a dashed horizontal line at zero.</description>
+      </image>
+    </figure>
+  </section>
+
 </chapter>

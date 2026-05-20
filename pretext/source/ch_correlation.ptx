@@ -3,6 +3,217 @@
   <title>Correlation</title>
 
   <p>
-    This placeholder chapter matches the Correlation chapter in the original R Markdown book.
+    The next analysis that we will go over is the correlation. The correlation and simple linear regression are similar with the only difference being that the estimate of the slope of the correlation is standardized, while the estimate of the slope of the simple linear regression is unstandardized.
   </p>
+
+  <p>
+    The correlation that is typically taught is the Pearson correlation, which is the correlation between two continuous variables. However, despite the difference in correlation nomenclature for different variable types, these correlations are similarly applied in the GLM approach.
+  </p>
+
+  <p>
+    As a side note, this is also the chapter that people associate the phrase "correlation is not causation." This phrase is correct and should be thoughtfully considered. All statistical analyses are looking at how variables relate (or correlate or covary) with each other. Thus, the phrase "correlation is not causation" is about research design rather than statistical analysis.
+  </p>
+
+  <p>
+    Given that the simple linear regression and correlation are similar, we can use the same example from the <xref ref="ch-simple-linear-regression" text="title"/> chapter, where we were interested in determining if there was a relationship (or correlation) between the number of years since a professor has had their Ph.D. and their salary. We will be using the same <xref ref="sec-salaries-dataset" text="title"/> dataset to facilitate comparisons.
+  </p>
+
+  <section xml:id="sec-corr-hypotheses">
+    <title>Null and Research Hypotheses</title>
+
+    <subsection xml:id="subsec-corr-traditional-hypotheses">
+      <title>Traditional Approach</title>
+
+      <p>
+        <md>
+          <mrow>H_0\text{: } \rho \amp= 0</mrow>
+          <mrow>H_1\text{: } \rho \amp\ne 0</mrow>
+        </md>
+        where <m>\rho</m> represents the population correlation value (Note: <m>r</m> represents the estimated population correlation value or sample correlation value.)
+      </p>
+
+      <p>
+        The null hypothesis states that there is no correlation between the amount of years since earning a Ph.D. and their salary (i.e., their relationship is equal to 0). In contrast, the research hypothesis states there is a correlation (i.e., the relationship is not equal to 0).
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-corr-glm-hypotheses">
+      <title>GLM Approach</title>
+
+      <p>
+        <md>
+          <mrow>\text{Model: } Z_{salary} \amp= \beta_0 + \beta_1 \cdot Z_{years.since.phd} + \varepsilon</mrow>
+          <mrow>H_0\text{: } \beta_1 \amp= 0</mrow>
+          <mrow>H_1\text{: } \beta_1 \amp\ne 0</mrow>
+        </md>
+        where <m>Z</m> is the standardized (i.e., z-scored) version of that particular variable. As a reminder, z-scoring converts a variable to have a mean of 0 and a standard deviation of 1, but its distribution is unchanged.
+      </p>
+
+      <p>
+        In this example, the correlation value (<m>r</m>) is simply a standardized slope (<m>\beta</m>). Thus, standardizing both the DV and IV standardizes the slope. In other words, <m>r</m> is the standardized form of <m>b</m>. (Note: The estimated standardized slope within the regression context is unfortunately referred to by the same symbol as the true population regression coefficient symbol, <m>\beta</m>.)
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-corr-analyses">
+    <title>Statistical Analysis</title>
+
+    <subsection xml:id="subsec-corr-traditional-analysis">
+      <title>Traditional Approach</title>
+
+      <p>
+        Using the traditional approach, we can test the correlation by using the <c>cor.test()</c> function. The first input is the IV (<c>yrs.since.phd</c>) and the second input is the DV (<c>salary</c>). However, the order is essentially arbitrary and can be switched. Notice that in each input, we also included the name of the dataset (i.e., <c>datasetSalaries</c>) before each variable, which is separated by a <c>$</c>. The <c>$</c> calls an object within a larger object. In this case, the <c>$</c> calls the object or variable <c>yrs.since.phd</c> within the larger object of the <c>datasetSalaries</c> dataset.
+      </p>
+
+      <program language="r">
+        <input>
+cor.test(datasetSalaries$yrs.since.phd, datasetSalaries$salary)
+        </input>
+        <output>
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  datasetSalaries$yrs.since.phd and datasetSalaries$salary
+## t = 9.1775, df = 395, p-value &lt; 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.3346160 0.4971402
+## sample estimates:
+##       cor 
+## 0.4192311
+        </output>
+      </program>
+
+      <p>
+        The new statistic that is shown in this analysis is the correlation (<c>cor</c>) and the <c>95 percent confidence interval</c>. The correlation is the estimated correlation, <m>r</m>, which equals <c>0.42</c>. The 95% confidence interval represents our probabilistic confidence (i.e., 95% confident) that our true population correlation, <m>\rho</m>, would fall between the values of <c>0.33</c> and <c>0.50</c>.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-corr-glm-analysis">
+      <title>GLM Approach</title>
+
+      <p>
+        To perform a correlation using the GLM approach, we can again use the <c>lm</c> function.
+      </p>
+
+      <program language="r">
+        <input>
+model &lt;- lm(scale(salary) ~ 1 + scale(yrs.since.phd), data = datasetSalaries)
+        </input>
+      </program>
+
+      <p>
+        Remember, both the DV and IV need to be standardized so that our estimates are also standardized. Luckily, we can standardize both <c>salary</c> and <c>yrs.since.phd</c> directly in the formula by using the <c>scale</c> function.
+      </p>
+
+      <p>
+        The table that most aligns with the correlation output is the coefficients table and not the ANOVA source table, so we will only be using the <c>summary()</c> function for this analysis. However, we could use the <c>Anova()</c> function from the <c>car</c> package <xref ref="ref-fox-weisberg-book"/> to obtain the ANOVA source table if desired.
+      </p>
+
+      <program language="r">
+        <input>
+summary(model)
+        </input>
+        <output>
+## 
+## Call:
+## lm(formula = scale(salary) ~ 1 + scale(yrs.since.phd), data = datasetSalaries)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.7789 -0.6415 -0.0944  0.5311  3.3802 
+## 
+## Coefficients:
+##                        Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)          -2.446e-17  4.562e-02   0.000        1    
+## scale(yrs.since.phd)  4.192e-01  4.568e-02   9.177   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.909 on 395 degrees of freedom
+## Multiple R-squared:  0.1758, Adjusted R-squared:  0.1737 
+## F-statistic: 84.23 on 1 and 395 DF,  p-value: &lt; 2.2e-16
+        </output>
+      </program>
+
+      <p>
+        Since the estimates are standardized, the units are in standard deviations rather than their original metric.
+      </p>
+
+      <p>
+        For example, the slope represents the standard deviation unit change in Y (<c>scale(yrs.since.phd)</c>) for every one standard deviation unit increase in X (<c>salary</c>). In other words, there is a <c>0.42</c> standard deviation unit increase in salary for every one standard deviation unit increase in the number of years a professor has had their Ph.D.
+      </p>
+
+      <p>
+        The intercept represents Y (<c>salary</c>) in standard deviation units when X (<c>yrs.since.phd</c>) is 0 standard deviation units, or at the average value of X (<c>yrs.since.phd</c>). Remember, that 0 standard deviations (or a z-score of 0) is also the mean because z-scoring converts the mean to 0 and the standard deviation to 1. In other words, for a professor that has had their Ph.D. for 0 standard deviation units (or an average number of years), their predicted salary is <c>-5.89e-17</c> standard deviation units.
+      </p>
+
+      <p>
+        Given these interpretations of standardized slopes and intercepts, they are not our preference, especially when variables have easily interpreted metrics. However, standardized slopes and intercepts are preferred for quickly determining effect sizes as they can only range between -1 and +1. They are also preferred when comparing other predictors within and between other models as they are in a standardized metric; however, the validity of these comparisons are debated.
+      </p>
+
+      <program language="r">
+        <input>
+confint(model)
+        </input>
+        <output>
+##                            2.5 %     97.5 %
+## (Intercept)          -0.08969389 0.08969389
+## scale(yrs.since.phd)  0.32942404 0.50903818
+        </output>
+      </program>
+
+      <p>
+        Notice that in both analyses the values are identical with respect to place of rounding. The correlation <m>r</m> value is <c>.42</c>, <em>t</em>-statistic is <c>9.18</c> with <c>395</c> degrees of freedom (df), and the <em>p</em>-value is <c>2.2e-16</c>.
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-corr-decision">
+    <title>Statistical Decision</title>
+
+    <p>
+      Given the <em>p</em>-value of <c>2.2e-16</c> is smaller than the alpha level (<m>\alpha</m>) of <c>0.05</c>, we will <term>reject</term> the null hypothesis.
+    </p>
+  </section>
+
+  <section xml:id="sec-corr-apa">
+    <title>APA Statement</title>
+
+    <p>
+      A correlation was performed to test whether the amount years since obtaining a Ph.D. is related to salary. The amount of years since obtaining a Ph.D. was significantly related to salary, <em>r</em>(395) = 0.42, <em>p</em> &lt; .001.
+    </p>
+  </section>
+
+  <section xml:id="sec-corr-visualization">
+    <title>Visualization</title>
+
+    <p>
+      The following visualization uses <c>ggplot2</c> <xref ref="ref-wickham-ggplot2"/> from the <c>tidyverse</c> <xref ref="ref-wickham-tidyverse"/>.
+    </p>
+
+    <program language="r">
+      <input>
+ggplot(datasetSalaries, aes(yrs.since.phd, salary)) +
+  geom_point(alpha = 0.25) +
+  geom_smooth(method = "lm", color = "#3182bd") +
+  labs(
+    x = "Years since Ph.D.",
+    y = "9-Month Salary (USD)"
+  ) +
+  scale_x_continuous(sec.axis = sec_axis(scale, name = 'Years since Ph.D. [z-score]')) +
+  scale_y_continuous(labels = dollar, sec.axis = sec_axis(scale, labels = dollar, name = "9-Month Salary (USD) [z-score]")) +
+  theme_classic()
+      </input>
+    </program>
+
+    <figure xml:id="fig-corr-visualization">
+      <caption>A scatterplot of years since Ph.D. and salary along with the line of best fit. The gray band represents the 95% CI. Dual axes show both raw and z-scored values.</caption>
+      <image source="images/unnamed-chunk-23-1.png">
+        <description>A scatterplot showing the positive relationship between years since obtaining a PhD and 9-month salary in USD. Dual axes display both the original scale and z-scored values. The blue line of best fit and gray confidence band are overlaid.</description>
+      </image>
+    </figure>
+
+  </section>
+
 </chapter>

@@ -3,6 +3,471 @@
   <title>One-Way ANOVA</title>
 
   <p>
-    This placeholder chapter matches the One-Way ANOVA chapter in the original R Markdown book.
+    Next, let's go over the one-way ANOVA, which is used when we have two or more independent groups. Specifically, the one-way ANOVA determines if there is a difference in any of the group level means. Given that the analysis can also be used for two independent groups, this analysis could be used instead of the <xref ref="ch-independent-samples-t-test" text="title"/>.
   </p>
+
+  <p>
+    For example, let's say that we were interested in determining if salary was significantly different for professors of different ranks (i.e., assistant professor, associate professor, and professor).
+  </p>
+
+  <p>
+    For this example, we will use the dataset: <xref ref="sec-salaries-dataset" text="title"/>.
+  </p>
+
+  <p>
+    As mentioned in the <xref ref="ch-independent-samples-t-test" text="title"/>, when dealing with categorical predictors, it is always a good idea to check the coding scheme of the categorical variable.
+  </p>
+
+  <program language="r">
+    <input>
+contrasts(datasetSalaries$rank)
+    </input>
+    <output>
+##                     2 3
+## Assistant Professor 0 0
+## Associate Professor 1 0
+## Professor           0 1
+    </output>
+  </program>
+
+  <section xml:id="sec-coding-categorical-variables">
+    <title>Coding Categorical Variables</title>
+
+    <p>
+      When coding categorical variables, the number of contrasts (<m>m</m>) is equal to <m>k-1</m> where <m>k</m> is the number of levels (or factors) of an IV. In our example, <c>rank</c> has 3 levels (i.e., <c>Assistant Professor</c>, <c>Associate Professor</c>, and <c>Professor</c>) and thus has 2 contrasts.<fn><m>m_{rank} = k_{rank} - 1 = 3 - 1 = 2</m></fn>
+    </p>
+
+    <p>
+      This is the reason why in a one-way ANOVA, we have <m>k-1</m> between degrees of freedom. Thus, contrasts are always being performed, either explicitly if told or using a software package's default coding scheme (e.g., dummy coding for R) when testing a main effect of a categorical IV.
+    </p>
+
+    <subsection xml:id="subsec-dummy-coding">
+      <title>Dummy Coding</title>
+
+      <p>
+        Since <c>rank</c> has not yet been explicitly defined by us, <c>rank</c> is dummy coded (i.e., for each contrast, a level is coded as 1 and all other levels are coded as 0). In dummy coding, one level will always be coded as 0 in both contrasts. By default, the first level of the categorical IV in alphabetical order will be coded as 0. Thus, in our example, <c>Assistant Professor</c>, which is the first level of <c>rank</c> in alphabetical order, is coded as <c>0</c>.
+      </p>
+
+      <p>
+        When interpreting dummy coding contrasts, for each contrast, it is the level that is coded as 1 compared to the level that is coded as 0 in both contrasts. In our dummy coding scheme, the first contrast is comparing <c>Associate Professor</c>, which is coded as 1 in the first contrast, to <c>Assistant Professor</c>, which is coded as 0 in both contrasts. The second contrast is comparing <c>Professor</c>, which is coded as 1 in the second contrast, to <c>Assistant Professor</c>, which is again coded as 0 in both contrasts.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-orthogonal-coding">
+      <title>Orthogonal Coding</title>
+
+      <p>
+        However, <em>a priori</em> orthogonal contrast coding is preferred because this coding scheme allows us to create our own <em>a priori</em> contrasts of interest to answer more specific questions.
+      </p>
+
+      <p>
+        For example, let's say that in addition to determining if there is a difference in salary of professors based on their rank, we were also interested in more specific questions of interest such as:
+      </p>
+
+      <ol>
+        <li><p>Determining if there is a difference in salaries of professors that are tenured (<c>Associate Professor</c> and <c>Professor</c>) compared to those that are untenured (<c>Assistant Professor</c>).</p></li>
+        <li><p>Determining if there is a difference in salaries of professors that are <c>Associate Professors</c> compared to <c>Professors</c>.</p></li>
+      </ol>
+
+      <program language="r">
+        <input>
+contrasts(datasetSalaries$rank) &lt;- cbind(
+  TenuredvAssistant = c(-2, 1, 1),
+  AssociatevProfessor = c(0, -1, 1)
+)
+        </input>
+      </program>
+
+      <p>
+        To make a coding scheme orthogonal, we need to make sure that 1) the sum of each contrast equals zero and that 2) the sum of each contrast product is 0.
+      </p>
+
+      <p>
+        For example, to make the tenured vs. untenured professor contrast, we can code <c>Assistant Professor</c> as <c>-2</c> and both <c>Associate Professor</c> and <c>Professor</c> as <c>1</c> and assign it the name <c>TenuredvAssistant</c>. It's best to use signs that go in the direction of our prediction so that it's reflected in our estimates. Since we expect that tenured professors have higher salaries, tenured professors are assigned the positive value and assistant professors are assigned the negative value. Notice that the sum of the <c>TenuredvAssistant</c> contrast also adds up to 0.<fn><m>\Sigma Contrast\_Codes_{TenuredvAssistant} = -2 + 1 + 1 = 0</m></fn>
+      </p>
+
+      <p>
+        To make the next contrast of <c>Associate Professor</c> compared to <c>Professor</c>, we can code <c>Assistant Professor</c> as <c>0</c>, <c>Associate Professor</c> as <c>-1</c>, and <c>Professor</c> as <c>1</c> and give it the name <c>AssociatevProfessor</c>. Notice again that the sum of the <c>AssociatevProfessor</c> contrast adds up to 0.<fn><m>\Sigma Contrast\_Code_{AssociatevProfessor} = 0 - 1 + 1 = 0</m></fn>
+      </p>
+
+      <p>
+        Since both contrasts sum to zero, we can now check if the sum of products for each level across contrasts equals 0. In other words, we multiply the values across each contrast pair for each level and add them together. For example, the product across the contrasts of <c>Assistant Professor</c> is <m>-2 \times 0 = 0</m>, <c>Associate Professor</c> is <m>1 \times -1 = -1</m>, and <c>Professor</c> is <m>1 \times 1 = 1</m>. If we add them together, we get <m>0 - 1 + 1 = 0</m>.<fn><m>\Sigma Contrast_{TenuredvAssistant} \times Contrast_{AssociatevProfessor} = (-2 \times 0) + (1 \times -1) + (1 \times 1) = 0</m></fn>
+      </p>
+
+      <p>
+        To take orthogonal contrast coding a step further and make our estimates readily interpretable as the mean difference of that contrast, we can ensure that the difference of each contrast is 1. To do this, we can divide each contrast code by the number of values that are not coded as 0 for each contrast. For example, since all 3 codes of the <c>TenuredvAssistant</c> contrast are not equal to 0, we can divide by 3. Similarly, for the <c>AssociatevProfessor</c> contrast, we can divide each contrast code by 2 since 2 of the contrast codes are not equal to 0. Note that this is a rule of thumb and should be verified if contrasts are more complex.
+      </p>
+
+      <program language="r">
+        <input>
+contrasts(datasetSalaries$rank) &lt;- cbind(
+  TenuredvAssistant = c(-2 / 3, 1 / 3, 1 / 3),
+  AssociatevProfessor = c(0, -1 / 2, 1 / 2)
+)
+        </input>
+      </program>
+
+      <program language="r">
+        <input>
+contrasts(datasetSalaries$rank)
+        </input>
+        <output>
+##                     TenuredvAssistant AssociatevProfessor
+## Assistant Professor        -0.6666667                 0.0
+## Associate Professor         0.3333333                -0.5
+## Professor                   0.3333333                 0.5
+        </output>
+      </program>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-oneway-hypotheses">
+    <title>Null and Research Hypotheses</title>
+
+    <subsection xml:id="subsec-oneway-traditional-hypotheses">
+      <title>Traditional Approach</title>
+
+      <p>
+        <md>
+          <mrow>H_0\text{: } \mu_{Assistant\_Professors} \amp= \mu_{Associate\_Professors} = \mu_{Professors}</mrow>
+          <mrow>H_1\text{: } \mu_{Assistant\_Professors} \amp\ne \mu_{Associate\_Professors} \ne \mu_{Professors}</mrow>
+          <mrow>\amp\text{or } \mu_{Assistant\_Professors} \ne \mu_{Associate\_Professors} = \mu_{Professors}</mrow>
+          <mrow>\amp\text{or } \mu_{Assistant\_Professors} \ne \mu_{Professors} = \mu_{Associate\_Professors}</mrow>
+          <mrow>\amp\text{or } \mu_{Associate\_Professors} \ne \mu_{Professors} = \mu_{Assistant\_Professors}</mrow>
+        </md>
+      </p>
+
+      <p>
+        The null hypothesis states that there is no difference in salaries between professors of different ranks. The research hypothesis states that the salary of at least one rank of professors is different than the others. Thus, there are multiple options for a research hypothesis.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-oneway-glm-hypotheses">
+      <title>GLM Approach</title>
+
+      <p>
+        <md>
+          <mrow>\text{Model: } Salary \amp= \beta_0 + \beta_1 \cdot TenuredvAssistant + \beta_2 \cdot AssociatevProfessor + \varepsilon</mrow>
+          <mrow>H_0\text{: } \beta_1 \amp= \beta_2 = 0</mrow>
+          <mrow>H_1\text{: } \beta_1 \amp\ne 0 \text{ and/or } \beta_2 \ne 0</mrow>
+        </md>
+      </p>
+
+      <p>
+        In the model, we now have both contrasts as predictors. The main effect of rank is testing both predictors of <c>TenuredvAssistant</c> and <c>AssociatevProfessor</c>.
+      </p>
+
+      <p>
+        Given our orthogonal contrast coding scheme, the intercept (<m>\beta_0</m>) is now the mean 9-month academic salary of professors on average across rank.
+      </p>
+
+      <p>
+        The slope of <c>TenuredvAssistant</c> (<m>\beta_1</m>) represents the mean difference in the 9-month academic salary for professors that are tenured compared to assistant professors.
+      </p>
+
+      <p>
+        The slope of <c>AssociatevProfessor</c> (<m>\beta_2</m>) represents the mean difference in the 9-month academic salary for professors that are associate professors compared to professors.
+      </p>
+
+      <p>
+        Thus, the null hypothesis states that there is no difference in salary of tenured versus untenured professors and there is also no difference in salary of associate professors compared to professors. In other words, there is no difference in salary based on a professor's rank. The alternative hypothesis states that there is a difference in either the salary of tenured versus untenured professors or associate professor versus professor, or both. If only one contrast is significant, then that contrast must be strong enough to mask the non-significance of the other contrast.
+      </p>
+
+      <p>
+        Given the vagueness of the research hypothesis (i.e., the significance can be a single contrast or both contrasts), we can look at each individual slope to see which is actually significant since we explicitly defined its associated contrasts beforehand.
+      </p>
+
+      <p>
+        Thus, our null and research hypotheses for these specific questions would be the following for each slope:
+      </p>
+
+      <p>
+        <md>
+          <mrow>H_0\text{: } \beta_1 \amp= 0</mrow>
+          <mrow>H_1\text{: } \beta_1 \amp\ne 0</mrow>
+          <mrow>H_0\text{: } \beta_2 \amp= 0</mrow>
+          <mrow>H_1\text{: } \beta_2 \amp\ne 0</mrow>
+        </md>
+      </p>
+
+      <p>
+        Each of these null and research hypothesis pairs are also known as 1 degree of freedom tests since we are only testing 1 contrast at a time.
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-oneway-analyses">
+    <title>Statistical Analysis</title>
+
+    <subsection xml:id="subsec-oneway-traditional-analysis">
+      <title>Traditional Approach</title>
+
+      <p>
+        To perform a traditional One-Way ANOVA, we can use the <c>aov()</c> function. The first argument in the <c>aov()</c> function is the formula and the second argument is the name of the dataset. Notice that in the formula, we do not have to specify both contrasts because we have already applied the coding scheme directly to the categorical IV of <c>rank</c>. We will then use the <c>Anova()</c> function from the <c>car</c> package <xref ref="ref-fox-weisberg-book"/> to obtain type III sums of squares.
+      </p>
+
+      <program language="r">
+        <input>
+model &lt;- aov(salary ~ rank, datasetSalaries)
+        </input>
+      </program>
+
+      <program language="r">
+        <input>
+Anova(model, type = c("III"))
+        </input>
+        <output>
+## Anova Table (Type III tests)
+## 
+## Response: salary
+##                 Sum Sq  Df F value    Pr(>F)    
+## (Intercept) 2.6481e+12   1 4741.08 &lt; 2.2e-16 ***
+## rank        1.4323e+11   2  128.22 &lt; 2.2e-16 ***
+## Residuals   2.2007e+11 394                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+        </output>
+      </program>
+
+      <p>
+        Traditionally, if the main effect of a categorical IV was significant, we would perform a post-hoc test (e.g., Tukey's Honest Significant Difference [HSD]). In our case, <c>rank</c> is significant as the <em>p</em>-value of <c>2.2e-16</c> is less than our alpha of <c>0.05</c> and we would perform a post-hoc test to determine where the difference in salary actually comes from.
+      </p>
+
+      <p>
+        To perform Tukey's HSD, we could use the <c>TukeyHSD</c> function and provide the ANOVA analysis of the model as the input. The Tukey HSD essentially performs multiple independent samples <em>t</em>-tests of all possible pairs of the levels of a categorical IV but uses the error term from the ANOVA analysis in its calculation.
+      </p>
+
+      <program language="r">
+        <input>
+TukeyHSD(model)
+        </input>
+        <output>
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = salary ~ rank, data = datasetSalaries)
+## 
+## $rank
+##                                             diff       lwr      upr     p adj
+## Associate Professor-Assistant Professor 13100.45  3382.195 22818.71 0.0046514
+## Professor-Assistant Professor           45996.12 38395.941 53596.31 0.0000000
+## Professor-Associate Professor           32895.67 25154.507 40636.84 0.0000000
+        </output>
+      </program>
+
+      <p>
+        Given that this post-hoc test compares all pairs of levels without any <em>a priori</em> assumptions (similarly, for other post-hoc tests), this is another reason to use the <em>a priori</em> orthogonal contrast coding scheme.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-oneway-glm-analysis">
+      <title>GLM Approach</title>
+
+      <p>
+        Notice that in the formula, we do not have to specify both contrasts because we have already applied the coding scheme directly to the categorical IV of <c>rank</c>.
+      </p>
+
+      <program language="r">
+        <input>
+model &lt;- lm(salary ~ 1 + rank, datasetSalaries)
+        </input>
+      </program>
+
+      <program language="r">
+        <input>
+Anova(model, type = c("III"))
+        </input>
+        <output>
+## Anova Table (Type III tests)
+## 
+## Response: salary
+##                 Sum Sq  Df F value    Pr(>F)    
+## (Intercept) 2.6481e+12   1 4741.08 &lt; 2.2e-16 ***
+## rank        1.4323e+11   2  128.22 &lt; 2.2e-16 ***
+## Residuals   2.2007e+11 394                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+        </output>
+      </program>
+
+      <p>
+        Note that in both analyses, the <em>F</em>-statistic of <c>128.22</c> with <c>2</c> between degrees of freedom (df), <c>394</c> within degrees of freedom (df), and <em>p</em>-value of <c>2.2e-16</c> are identical.
+      </p>
+
+      <program language="r">
+        <input>
+summary(model)
+        </input>
+        <output>
+## 
+## Call:
+## lm(formula = salary ~ 1 + rank, data = datasetSalaries)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -68972 -16376  -1580  11755 104773 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)               100475       1459  68.855   &lt;2e-16 ***
+## rankTenuredvAssistant      29548       3323   8.892   &lt;2e-16 ***
+## rankAssociatevProfessor    32896       3290   9.997   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 23630 on 394 degrees of freedom
+## Multiple R-squared:  0.3943, Adjusted R-squared:  0.3912 
+## F-statistic: 128.2 on 2 and 394 DF,  p-value: &lt; 2.2e-16
+        </output>
+      </program>
+
+      <p>
+        The estimate for the <c>(Intercept)</c> represents the mean 9-month academic salary on average across <c>rank</c>.
+      </p>
+
+      <p>
+        The estimate for the <c>rankTenuredvAssistant</c> represents the mean difference in 9-month academic salary of tenured professors compared to assistant professors. Specifically, the 9-month academic salary of tenured professors was $29,548 more than assistant professors.
+      </p>
+
+      <p>
+        The estimate for the <c>rankAssociatevProfessor</c> represents the mean difference in 9-month academic salary of associate professors compared to professors. Specifically, the 9-month academic salary of professors was $32,896 more than associate professors.
+      </p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-oneway-decision">
+    <title>Statistical Decision</title>
+
+    <p>
+      Given the <em>p</em>-value of <c>&lt; 2.2e-16</c> for <c>rank</c> is less than the alpha level (<m>\alpha</m>) of <c>0.05</c>, we will <term>reject</term> the null hypothesis.
+    </p>
+
+    <p>
+      Notice both slopes are also significant, and we will also <term>reject</term> the null hypothesis for each.
+    </p>
+  </section>
+
+  <section xml:id="sec-oneway-apa">
+    <title>APA Statement</title>
+
+    <p>
+      An Analysis of Variance (ANOVA) using <em>a priori</em> orthogonal contrast coding was performed to test if there was a difference in the 9-month academic salary between 1) tenured (i.e., associate professors and professors) compared to untenured professors (i.e., assistant professors) and 2) associate professors compared to professors. There was a significant main effect of rank on salary, <em>F</em>(2, 394) = 128.22, <em>p</em> &lt; .001. Specific to our contrasts, tenured professors earned significantly more than untenured professors, <em>b</em> = $29,548, <em>t</em>(1, 394) = 8.892, <em>p</em> &lt; .001. Professors also earned significantly more than associate professors, <em>b</em> = $32,896, <em>t</em>(1, 394) = 9.997, <em>p</em> &lt; .001.
+    </p>
+  </section>
+
+  <section xml:id="sec-oneway-visualization">
+    <title>Visualization</title>
+
+    <p>
+      The following visualizations use <c>ggplot2</c> <xref ref="ref-wickham-ggplot2"/> from the <c>tidyverse</c> <xref ref="ref-wickham-tidyverse"/>.
+    </p>
+
+    <subsection xml:id="subsec-oneway-viz-traditional">
+      <title>Traditional</title>
+
+      <program language="r">
+        <input>
+# calculate descriptive statistics along with the 95% CI
+dataset_summary &lt;- datasetSalaries %&gt;%
+  group_by(rank) %&gt;%
+  summarize(
+    mean = mean(salary),
+    sd = sd(salary),
+    n = n(),
+    sem = sd / sqrt(n),
+    tcrit = abs(qt(0.05 / 2, df = n - 1)),
+    ME = tcrit * sem,
+    LL95CI = mean - ME,
+    UL95CI = mean + ME
+  )
+
+# plot
+ggplot(datasetSalaries, aes(rank, salary)) +
+  geom_jitter(alpha = 0.1, width = 0.1) +
+  geom_errorbar(data = dataset_summary, aes(x = rank, y = mean, ymin = LL95CI, ymax = UL95CI), color = "#3182bd", width = 0.02) +
+  geom_point(dat = dataset_summary, aes(x = rank, y = mean), color = "#3182bd", size = 3) +
+  labs(
+    x = "Rank",
+    y = "9-Month Academic Salary (USD)"
+  ) +
+  scale_y_continuous(labels = scales::dollar) +
+  theme_classic()
+        </input>
+      </program>
+
+      <figure xml:id="fig-one-way-anova-traditional">
+        <caption>A dot plot of the 9-month academic salaries of professors by their rank within the university (i.e., assistant professor, associate professor, and professor). Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points.</caption>
+        <image source="images/fig-one-way-anova-traditional-1.png">
+          <description>A dot plot showing individual salary data points (jittered) grouped by professor rank (assistant, associate, and full professor), with blue dots for group means and blue error bars for 95% confidence intervals.</description>
+        </image>
+      </figure>
+    </subsection>
+
+    <subsection xml:id="subsec-oneway-viz-orthogonal">
+      <title>Orthogonal Contrast Coding</title>
+
+      <program language="r">
+        <input>
+datasetSalaries_long &lt;- datasetSalaries %&gt;%
+  mutate(professor = 1:nrow(.),
+         TenuredvAssistant = case_when(
+    rank == "Assistant Professor" ~ -2,
+    rank == "Associate Professor" ~ 1,
+    rank == "Professor" ~ 1),
+        AssociatevProfessor = case_when(
+    rank == "Assistant Professor" ~ 0,
+    rank == "Associate Professor" ~ -1,
+    rank == "Professor" ~ 1)
+  ) %&gt;%
+  select(professor, salary, TenuredvAssistant, AssociatevProfessor) %&gt;%
+  reshape2::melt(., id.vars = c("professor", "salary")) %&gt;%
+  filter(value != 0) %&gt;%
+  rowwise() %&gt;%
+  mutate(rank = case_when(
+    variable == "TenuredvAssistant" &amp;&amp; value == -2 ~ "Assistant",
+    variable == "TenuredvAssistant" &amp;&amp; value == 1 ~ "Tenured",
+    variable == "AssociatevProfessor" &amp;&amp; value == 1 ~ "Professor",
+    variable == "AssociatevProfessor" &amp;&amp; value == -1 ~ "Associate"
+  ))
+
+dataset_summary &lt;- datasetSalaries_long %&gt;%
+  group_by(variable, value) %&gt;%
+  summarize(
+    mean = mean(salary),
+    sd = sd(salary),
+    n = n(),
+    sem = sd / sqrt(n),
+    tcrit = abs(qt(0.05 / 2, df = n - 1)),
+    ME = tcrit * sem,
+    LL95CI = mean - ME,
+    UL95CI = mean + ME
+  )
+
+ggplot(datasetSalaries_long, aes(value, salary)) +
+  geom_jitter(alpha = 0.1, width = 0.3) +
+  geom_errorbar(data = dataset_summary, aes(x = value, y = mean, ymin = LL95CI, ymax = UL95CI), color = "#3182bd", width = 0.05) +
+  geom_line(data = dataset_summary, aes(x = value, y = mean)) +
+  geom_point(data = dataset_summary, aes(x = value, y = mean), color = "#3182bd", size = 3) +
+  geom_text(aes(label = rank, x = value, y = 0), size = 3) +
+  facet_wrap(~ variable) +
+  labs(
+    x = "Rank",
+    y = "9-Month Academic Salary (USD)"
+  ) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_continuous(breaks = seq(-3, 3, 1), limits = c(-3,3)) +
+  theme_classic() +
+  theme(strip.background = element_blank())
+        </input>
+      </program>
+
+      <figure xml:id="fig-one-way-anova-orthogonal">
+        <caption>A dot plot of the 9-month academic salaries of professors by their rank within the university using orthogonal contrast coding. Respectively for each rank, the dot represents the mean salary and the bars represent the 95% CI. Note: The data points are only jittered (dispersed) for easier visualization of all data points.</caption>
+        <image source="images/unnamed-chunk-44-1.png">
+          <description>A faceted dot plot showing salary data by orthogonal contrasts: one panel for the Tenured vs. Assistant Professor contrast and one panel for the Associate vs. Professor contrast, with blue dots for means and blue error bars for 95% CIs.</description>
+        </image>
+      </figure>
+    </subsection>
+  </section>
+
 </chapter>

@@ -11,6 +11,7 @@
   <section xml:id="sec-salaries-dataset">
     <title>Salaries Dataset</title>
 
+    <introduction>
     <program language="r">
       <input>
 datasetSalaries &lt;- carData::Salaries
@@ -58,6 +59,7 @@ datasetSalaries &lt;- carData::Salaries
         <cell>Professor's nine-month salary (USD)</cell>
       </row>
     </tabular>
+    </introduction>
 
     <subsection xml:id="subsec-salaries-wrangling">
       <title>Data Wrangling</title>
@@ -94,9 +96,11 @@ datasetSalaries &lt;- datasetSalaries %&gt;%
     <subsection xml:id="subsec-salaries-descriptives">
       <title>Descriptive Statistics</title>
 
+      <introduction>
       <p>
         It's also always a good idea to examine the data numerically and visually. Let's first look at the categorical variables then the continuous variables.
       </p>
+      </introduction>
 
       <subsubsection xml:id="subsubsec-salaries-categorical">
         <title>Categorical Variables</title>
@@ -319,6 +323,7 @@ ggplot(data = datasetSalaries, mapping = aes(x = salary)) +
   <section xml:id="sec-anorexia-dataset">
     <title>Anorexia Dataset</title>
 
+    <introduction>
     <program language="r">
       <input>
 datasetAnorexia &lt;- MASS::anorexia
@@ -351,6 +356,7 @@ datasetAnorexia &lt;- MASS::anorexia
         <cell>Weight of female patient with anorexia after treatment in lbs.</cell>
       </row>
     </tabular>
+    </introduction>
 
     <subsection xml:id="subsec-anorexia-wrangling">
       <title>Data Wrangling</title>

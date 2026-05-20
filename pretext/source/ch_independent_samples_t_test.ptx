@@ -2,6 +2,7 @@
 <chapter xml:id="ch-independent-samples-t-test" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Independent Samples <em>t</em>-Test</title>
 
+  <introduction>
   <p>
     The independent samples <em>t</em>-test compares the means of two different (or independent) samples.
   </p>
@@ -13,6 +14,7 @@
   <p>
     For this example, we will use the <xref ref="sec-salaries-dataset" text="title"/> data set.
   </p>
+  </introduction>
 
   <section xml:id="sec-indsamp-hypotheses">
     <title>Null and Research Hypotheses</title>

@@ -2,6 +2,7 @@
 <chapter xml:id="ch-one-way-anova" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>One-Way ANOVA</title>
 
+  <introduction>
   <p>
     Next, let's go over the one-way ANOVA, which is used when we have two or more independent groups. Specifically, the one-way ANOVA determines if there is a difference in any of the group level means. Given that the analysis can also be used for two independent groups, this analysis could be used instead of the <xref ref="ch-independent-samples-t-test" text="title"/>.
   </p>
@@ -29,6 +30,7 @@ contrasts(datasetSalaries$rank)
 ## Professor           0 1
     </output>
   </program>
+  </introduction>
 
   <section xml:id="sec-coding-categorical-variables">
     <title>Coding Categorical Variables</title>

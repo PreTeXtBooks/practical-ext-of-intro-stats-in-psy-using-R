@@ -133,6 +133,8 @@ model &lt;- lm(formula = salary ~ 1 + yrs.since.phd, data = datasetSalaries)
       <input>
 Anova(model, type = 3)
       </input>
+</program>
+<console>
       <output>
 ## Anova Table (Type III tests)
 ## 
@@ -144,7 +146,7 @@ Anova(model, type = 3)
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
       </output>
-    </program>
+    </console>
 
     <p>
       Note: We prefer the <c>Anova</c> function with a capitol <term>A</term> over the <c>anova</c> function with a lowercase <term>a</term> because we can specify the type of sum of squares. Briefly, the sum of squares in the <c>anova</c> function is type I sums of squares and cannot be changed while we can specify type III sums of squares, which is the default among most statistical softwares, using the <c>Anova</c> function. To learn more about different types of sum of squares, check out Mangiafico's <url href="https://rcompanion.org/rcompanion/d_04.html" visual="rcompanion.org/rcompanion/d_04.html">explanation</url>.
@@ -203,7 +205,9 @@ Anova(model, type = 3)
         <input>
 summary(model)
         </input>
-        <output>
+</program>
+<console>
+<output>
 ## 
 ## Call:
 ## lm(formula = salary ~ 1 + yrs.since.phd, data = datasetSalaries)
@@ -223,7 +227,7 @@ summary(model)
 ## Multiple R-squared:  0.1758, Adjusted R-squared:  0.1737 
 ## F-statistic: 84.23 on 1 and 395 DF,  p-value: &lt; 2.2e-16
         </output>
-      </program>
+      </console>
     </subsection>
 
     <subsection xml:id="subsec-slr-read-coefficients">

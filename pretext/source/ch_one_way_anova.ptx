@@ -23,13 +23,15 @@
     <input>
 contrasts(datasetSalaries$rank)
     </input>
+</program>
+<console>
     <output>
 ##                     2 3
 ## Assistant Professor 0 0
 ## Associate Professor 1 0
 ## Professor           0 1
     </output>
-  </program>
+  </console>
   </introduction>
 
   <section xml:id="sec-coding-categorical-variables">
@@ -113,13 +115,15 @@ contrasts(datasetSalaries$rank) &lt;- cbind(
         <input>
 contrasts(datasetSalaries$rank)
         </input>
+</program>
+<console>
         <output>
 ##                     TenuredvAssistant AssociatevProfessor
 ## Assistant Professor        -0.6666667                 0.0
 ## Associate Professor         0.3333333                -0.5
 ## Professor                   0.3333333                 0.5
         </output>
-      </program>
+      </console>
     </subsection>
   </section>
 
@@ -218,18 +222,20 @@ model &lt;- aov(salary ~ rank, datasetSalaries)
         <input>
 Anova(model, type = c("III"))
         </input>
+</program>
+<console>
         <output>
 ## Anova Table (Type III tests)
 ## 
 ## Response: salary
-##                 Sum Sq  Df F value    Pr(>F)    
+##                 Sum Sq  Df F value    Pr(&gt;F)    
 ## (Intercept) 2.6481e+12   1 4741.08 &lt; 2.2e-16 ***
 ## rank        1.4323e+11   2  128.22 &lt; 2.2e-16 ***
 ## Residuals   2.2007e+11 394                      
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
         </output>
-      </program>
+      </console>
 
       <p>
         Traditionally, if the main effect of a categorical IV was significant, we would perform a post-hoc test (e.g., Tukey's Honest Significant Difference [HSD]). In our case, <c>rank</c> is significant as the <em>p</em>-value of <c>2.2e-16</c> is less than our alpha of <c>0.05</c> and we would perform a post-hoc test to determine where the difference in salary actually comes from.
@@ -243,6 +249,8 @@ Anova(model, type = c("III"))
         <input>
 TukeyHSD(model)
         </input>
+</program>
+<console>
         <output>
 ##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
@@ -255,7 +263,7 @@ TukeyHSD(model)
 ## Professor-Assistant Professor           45996.12 38395.941 53596.31 0.0000000
 ## Professor-Associate Professor           32895.67 25154.507 40636.84 0.0000000
         </output>
-      </program>
+      </console>
 
       <p>
         Given that this post-hoc test compares all pairs of levels without any <em>a priori</em> assumptions (similarly, for other post-hoc tests), this is another reason to use the <em>a priori</em> orthogonal contrast coding scheme.
@@ -279,18 +287,20 @@ model &lt;- lm(salary ~ 1 + rank, datasetSalaries)
         <input>
 Anova(model, type = c("III"))
         </input>
+</program>
+<console>
         <output>
 ## Anova Table (Type III tests)
 ## 
 ## Response: salary
-##                 Sum Sq  Df F value    Pr(>F)    
+##                 Sum Sq  Df F value    Pr(&gt;F)    
 ## (Intercept) 2.6481e+12   1 4741.08 &lt; 2.2e-16 ***
 ## rank        1.4323e+11   2  128.22 &lt; 2.2e-16 ***
 ## Residuals   2.2007e+11 394                      
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
         </output>
-      </program>
+      </console>
 
       <p>
         Note that in both analyses, the <em>F</em>-statistic of <c>128.22</c> with <c>2</c> between degrees of freedom (df), <c>394</c> within degrees of freedom (df), and <em>p</em>-value of <c>2.2e-16</c> are identical.
@@ -300,6 +310,8 @@ Anova(model, type = c("III"))
         <input>
 summary(model)
         </input>
+</program>
+<console>
         <output>
 ## 
 ## Call:
@@ -310,7 +322,7 @@ summary(model)
 ## -68972 -16376  -1580  11755 104773 
 ## 
 ## Coefficients:
-##                         Estimate Std. Error t value Pr(>|t|)    
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
 ## (Intercept)               100475       1459  68.855   &lt;2e-16 ***
 ## rankTenuredvAssistant      29548       3323   8.892   &lt;2e-16 ***
 ## rankAssociatevProfessor    32896       3290   9.997   &lt;2e-16 ***
@@ -321,7 +333,7 @@ summary(model)
 ## Multiple R-squared:  0.3943, Adjusted R-squared:  0.3912 
 ## F-statistic: 128.2 on 2 and 394 DF,  p-value: &lt; 2.2e-16
         </output>
-      </program>
+      </console>
 
       <p>
         The estimate for the <c>(Intercept)</c> represents the mean 9-month academic salary on average across <c>rank</c>.
@@ -359,10 +371,6 @@ summary(model)
 
   <section xml:id="sec-oneway-visualization">
     <title>Visualization</title>
-
-    <p>
-      The following visualizations use <c>ggplot2</c> <xref ref="ref-wickham-ggplot2"/> from the <c>tidyverse</c> <xref ref="ref-wickham-tidyverse"/>.
-    </p>
 
     <subsection xml:id="subsec-oneway-viz-traditional">
       <title>Traditional</title>

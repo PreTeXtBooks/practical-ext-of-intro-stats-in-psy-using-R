@@ -89,16 +89,16 @@
     <title>License</title>
 
     <sidebyside widths="8% 8% 8% 8%" margins="0%">
-      <image source="https://mirrors.creativecommons.org/presskit/icons/cc.xlarge.png">
+      <image source="images/cc.xlarge.png">
+        <description>CC</description>
+      </image>
+      <image source="images/by.xlarge.png">
         <description>Attribution</description>
       </image>
-      <image source="https://mirrors.creativecommons.org/presskit/icons/by.xlarge.png">
-        <description>Attribution</description>
-      </image>
-      <image source="https://mirrors.creativecommons.org/presskit/icons/nc.xlarge.png">
+      <image source="images/nc.xlarge.png">
         <description>Non-Commercial</description>
       </image>
-      <image source="https://mirrors.creativecommons.org/presskit/icons/sa.xlarge.png">
+      <image source="images/sa.xlarge.png">
         <description>ShareAlike</description>
       </image>
     </sidebyside>

@@ -19,7 +19,14 @@
     <xi:include href="./ch_prerequisites.ptx" />
     <xi:include href="./ch_r_packages.ptx" />
     <xi:include href="./ch_datasets.ptx" />
-    <xi:include href="./pt_introductory_univariate_statistics.ptx" />
+    <xi:include href="./ch_simple_linear_regression.ptx" />
+    <xi:include href="./ch_correlation.ptx" />
+    <xi:include href="./ch_one_sample_t_test.ptx" />
+    <xi:include href="./ch_dependent_samples_t_test.ptx" />
+    <xi:include href="./ch_independent_samples_t_test.ptx" />
+    <xi:include href="./ch_one_way_anova.ptx" />
+    <xi:include href="./ch_factorial_anova.ptx" />
+    <xi:include href="./ch_glm_approach_summary.ptx" />
     <xi:include href="./meta_backmatter.ptx" />
   </book>
 </pretext>

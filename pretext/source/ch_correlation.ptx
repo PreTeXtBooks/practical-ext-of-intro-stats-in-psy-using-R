@@ -196,10 +196,6 @@ confint(model)
   <section xml:id="sec-corr-visualization">
     <title>Visualization</title>
 
-    <p>
-      The following visualization uses <c>ggplot2</c> <xref ref="ref-wickham-ggplot2"/> from the <c>tidyverse</c> <xref ref="ref-wickham-tidyverse"/>.
-    </p>
-
     <program language="r">
       <input>
 ggplot(datasetSalaries, aes(yrs.since.phd, salary)) +

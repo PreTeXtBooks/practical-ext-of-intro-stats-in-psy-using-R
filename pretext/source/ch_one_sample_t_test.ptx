@@ -75,6 +75,8 @@
         <input>
 t.test(x = datasetSalaries$salary, mu = 50221)
         </input>
+</program>
+<console>
         <output>
 ## 
 ##  One Sample t-test
@@ -88,7 +90,7 @@ t.test(x = datasetSalaries$salary, mu = 50221)
 ## mean of x 
 ##  113706.5
         </output>
-      </program>
+      </console>
 
       <p>
         From this output, we can see that the <em>t</em>-statistic (<c>t</c>) is <c>41.762</c>, degrees of freedom (<c>df</c>) is <c>396</c>, and the <c>p-value</c> is <c>2.2e-16</c>, with professor's mean salary at $113,706.50. Therefore, professors earn a significantly higher salary compared with the national U.S. median income of $50,221 in 2009.
@@ -120,6 +122,8 @@ model &lt;- lm(salary - 50221 ~ 1, datasetSalaries)
         <input>
 summary(model)
         </input>
+</program>
+<console>
         <output>
 ## 
 ## Call:
@@ -130,14 +134,14 @@ summary(model)
 ## -55906 -22706  -6406  20479 117839 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
+##             Estimate Std. Error t value Pr(&gt;|t|)    
 ## (Intercept)    63486       1520   41.76   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 30290 on 396 degrees of freedom
         </output>
-      </program>
+      </console>
 
       <p>
         Notice that in both approaches the values are identical with respect to the place of rounding. The <em>t</em>-statistic is <c>41.76</c> with <c>396</c> degrees of freedom (df), and the <em>p</em>-value is <c>&lt;2e-16</c>. However, the estimate of the GLM approach is now the sample mean of the point deviated scores. Thus, if we add back $50,221, we will obtain the same sample mean of $113,707.<fn><m>M = \$63{,}486 + \$50{,}221 = \$113{,}707</m></fn>

@@ -36,4 +36,14 @@
       This book aims to provide a practical extension of introductory statistics typically taught in psychology into the general linear model (GLM) using R.
     </p>
   </preface>
+
+  <preface xml:id="front-pretext-note">
+    <title>Note on This PreTeXt Edition</title>
+    <p>
+      This is a <url href="https://pretextbook.org/">PreTeXt</url> conversion of <em>A Practical Extension of Introductory Statistics in Psychology using R</em>, originally written by Ekarin E. Pongpipat, Giuseppe G. Miranda, and Matthew J. Kmiecik. The original work is available online at <url href="https://rpsystats.com">rpsystats.com</url>. The original GitHub repository for the book source is at <url href="https://github.com/epongpipat/practical-ext-of-intro-stats-in-psy-using-R">github.com/epongpipat/practical-ext-of-intro-stats-in-psy-using-R</url>.
+    </p>
+    <p>
+      This PreTeXt edition was prepared by <url href="https://github.com/PreTeXtBooks/practical-ext-of-intro-stats-in-psy-using-R">the PreTeXtBooks project</url> to make the content available in the PreTeXt format, enabling accessible and structured output in HTML, PDF, and other formats. All prose, code examples, figures, and mathematical content are intended to be faithful reproductions of the original work, though occasional typographical errors may have been introduced in the conversion process. Report any issues to our <url href="https://github.com/PreTeXtBooks/practical-ext-of-intro-stats-in-psy-using-R/issues">GitHub Issues Page</url>. The original work is licensed under a <url href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</url>.
+    </p>
+  </preface>
 </frontmatter>

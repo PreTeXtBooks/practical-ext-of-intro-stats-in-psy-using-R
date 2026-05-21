@@ -61,12 +61,14 @@
         <input>
 contrasts(datasetSalaries$discipline)
         </input>
+</program>
+<console>
         <output>
 ##             Theoretical
 ## Applied               0
 ## Theoretical           1
         </output>
-      </program>
+      </console>
 
       <p>
         We can see that <c>Applied</c> is coded as <c>0</c> and <c>Theoretical</c> is coded as <c>1</c>. Given that the difference of the coding scheme of <c>discipline</c> is 1, the slope represents the mean difference in salary for professors that are in theoretical disciplines compared to applied disciplines.<fn><m>b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{1-0} = \frac{\Delta Salary}{1} = \Delta Salary</m></fn> Additionally, the intercept (<m>\beta_{0}</m>) represents the mean salary of professors in the applied discipline since 0 represents <c>Applied</c> in the <c>discipline</c> coding scheme.
@@ -93,12 +95,14 @@ contrasts(datasetSalaries$discipline)
 contrasts(datasetSalaries$discipline) &lt;- c(0.5, -0.5)
 contrasts(datasetSalaries$discipline)
         </input>
+</program>
+<console>
         <output>
 ##             [,1]
 ## Applied      0.5
 ## Theoretical -0.5
         </output>
-      </program>
+      </console>
 
       <p>
         Note: If the difference in <c>discipline</c> was not equal to 1, the estimate would equal the fraction of the difference. For example, if <c>Applied</c> was coded as <c>-1</c> and <c>Theoretical</c> was coded as <c>1</c>, the difference of <c>discipline</c> is now 2 and the estimate would represent half of the salary mean difference.<fn><m>b_1 = \frac{\Delta Y}{\Delta X} = \frac{\Delta Salary}{\Delta Discipline} = \frac{\Delta Salary}{1-(-1)} = \frac{\Delta Salary}{2}</m></fn> Thus, if we multiplied the estimate by 2, we would obtain the mean salary difference. Even though the estimate changes, the <em>t</em>-statistic and <em>p</em>-value will not change as the intercept and error will adjust proportionally to the coding scheme of the categorical IV (as long as they are unique values).
@@ -120,6 +124,8 @@ contrasts(datasetSalaries$discipline)
         <input>
 t.test(datasetSalaries$salary ~ datasetSalaries$discipline, var.equal = TRUE)
         </input>
+</program>
+<console>
         <output>
 ## 
 ##  Two Sample t-test
@@ -133,7 +139,7 @@ t.test(datasetSalaries$salary ~ datasetSalaries$discipline, var.equal = TRUE)
 ##     mean in group Applied mean in group Theoretical 
 ##                  118028.7                  108548.4
         </output>
-      </program>
+      </console>
 
       <p>
         Note: There are other ways to enter the formula into <c>t.test()</c> function depending on how the dataset is formatted.
@@ -157,6 +163,8 @@ model &lt;- lm(salary ~ 1 + discipline, datasetSalaries)
         <input>
 summary(model)
         </input>
+</program>
+<console>
         <output>
 ## 
 ## Call:
@@ -167,7 +175,7 @@ summary(model)
 ## -50748 -24611  -4429  19138 113516 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
+##             Estimate Std. Error t value Pr(&gt;|t|)    
 ## (Intercept)   113289       1509  75.060  &lt; 2e-16 ***
 ## discipline1     9480       3019   3.141  0.00181 ** 
 ## ---
@@ -177,7 +185,7 @@ summary(model)
 ## Multiple R-squared:  0.02436,    Adjusted R-squared:  0.02189 
 ## F-statistic: 9.863 on 1 and 395 DF,  p-value: 0.001813
         </output>
-      </program>
+      </console>
 
       <p>
         Notice that in both analyses, the <em>t</em>-statistic (<c>t value</c>) of <c>-3.14</c> with <c>395</c> degrees of freedom (df), and <em>p</em>-value of <c>.002</c> are identical to the output from the <c>t.test()</c> function.
@@ -211,10 +219,6 @@ summary(model)
 
   <section xml:id="sec-indsamp-visualization">
     <title>Visualization</title>
-
-    <p>
-      The following visualization uses <c>ggplot2</c> <xref ref="ref-wickham-ggplot2"/> from the <c>tidyverse</c> <xref ref="ref-wickham-tidyverse"/>.
-    </p>
 
     <program language="r">
       <input>

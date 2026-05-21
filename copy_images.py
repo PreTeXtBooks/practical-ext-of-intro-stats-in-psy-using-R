@@ -5,9 +5,9 @@ This script downloads official CC license icons (if network is available)
 to update the locally committed fallback icons.
 """
 
-import shutil
-import subprocess
+import urllib.error
 import urllib.request
+import shutil
 from pathlib import Path
 
 
@@ -19,6 +19,8 @@ CC_ICONS = {
     "sa.xlarge.png": "https://mirrors.creativecommons.org/presskit/icons/sa.xlarge.png",
 }
 
+_DOWNLOAD_TIMEOUT = 30  # seconds
+
 
 def try_download_cc_icons(target_dir: Path) -> int:
     """Try to download official CC license icons. Returns number downloaded."""
@@ -29,7 +31,7 @@ def try_download_cc_icons(target_dir: Path) -> int:
             urllib.request.urlretrieve(url, str(target_file))
             downloaded += 1
             print(f"  Downloaded: {filename}")
-        except Exception as e:
+        except (urllib.error.URLError, OSError) as e:
             print(f"  Warning: Could not download {filename} from {url}: {e}")
             print(f"  Using committed fallback icon for {filename}")
     return downloaded

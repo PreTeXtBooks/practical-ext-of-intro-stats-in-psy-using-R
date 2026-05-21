@@ -90,7 +90,7 @@
 
     <sidebyside widths="8% 8% 8% 8%" margins="0%">
       <image source="images/cc.xlarge.png">
-        <description>Creative Commons</description>
+        <description>CC</description>
       </image>
       <image source="images/by.xlarge.png">
         <description>Attribution</description>

@@ -71,6 +71,8 @@
         <input>
 cor.test(datasetSalaries$yrs.since.phd, datasetSalaries$salary)
         </input>
+</program>
+<console>
         <output>
 ## 
 ##  Pearson's product-moment correlation
@@ -84,7 +86,7 @@ cor.test(datasetSalaries$yrs.since.phd, datasetSalaries$salary)
 ##       cor 
 ## 0.4192311
         </output>
-      </program>
+      </console>
 
       <p>
         The new statistic that is shown in this analysis is the correlation (<c>cor</c>) and the <c>95 percent confidence interval</c>. The correlation is the estimated correlation, <m>r</m>, which equals <c>0.42</c>. The 95% confidence interval represents our probabilistic confidence (i.e., 95% confident) that our true population correlation, <m>\rho</m>, would fall between the values of <c>0.33</c> and <c>0.50</c>.
@@ -116,6 +118,8 @@ model &lt;- lm(scale(salary) ~ 1 + scale(yrs.since.phd), data = datasetSalaries)
         <input>
 summary(model)
         </input>
+</program>
+<console>
         <output>
 ## 
 ## Call:
@@ -126,7 +130,7 @@ summary(model)
 ## -2.7789 -0.6415 -0.0944  0.5311  3.3802 
 ## 
 ## Coefficients:
-##                        Estimate Std. Error t value Pr(>|t|)    
+##                        Estimate Std. Error t value Pr(&gt;|t|)    
 ## (Intercept)          -2.446e-17  4.562e-02   0.000        1    
 ## scale(yrs.since.phd)  4.192e-01  4.568e-02   9.177   &lt;2e-16 ***
 ## ---
@@ -136,7 +140,7 @@ summary(model)
 ## Multiple R-squared:  0.1758, Adjusted R-squared:  0.1737 
 ## F-statistic: 84.23 on 1 and 395 DF,  p-value: &lt; 2.2e-16
         </output>
-      </program>
+      </console>
 
       <p>
         Since the estimates are standardized, the units are in standard deviations rather than their original metric.
@@ -158,12 +162,14 @@ summary(model)
         <input>
 confint(model)
         </input>
+</program>
+<console>
         <output>
 ##                            2.5 %     97.5 %
 ## (Intercept)          -0.08969389 0.08969389
 ## scale(yrs.since.phd)  0.32942404 0.50903818
         </output>
-      </program>
+      </console>
 
       <p>
         Notice that in both analyses the values are identical with respect to place of rounding. The correlation <m>r</m> value is <c>.42</c>, <em>t</em>-statistic is <c>9.18</c> with <c>395</c> degrees of freedom (df), and the <em>p</em>-value is <c>2.2e-16</c>.

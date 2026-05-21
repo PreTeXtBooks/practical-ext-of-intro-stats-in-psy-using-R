@@ -74,6 +74,8 @@
         <input>
 t.test(datasetAnorexia$PostWeight, datasetAnorexia$PreWeight, paired = TRUE)
         </input>
+</program>
+<console>
         <output>
 ## 
 ##  Paired t-test
@@ -87,7 +89,7 @@ t.test(datasetAnorexia$PostWeight, datasetAnorexia$PreWeight, paired = TRUE)
 ## mean difference 
 ##        2.763889
         </output>
-      </program>
+      </console>
 
       <p>
         From this output, we can see that the <em>t</em>-statistic (<c>t</c>) is <c>2.9376</c>, degrees of freedom (<c>df</c>) is <c>71</c>, and the <c>p-value</c> is <c>0.004458</c>.
@@ -111,6 +113,8 @@ model &lt;- lm(PostWeight - PreWeight ~ 1, datasetAnorexia)
         <input>
 summary(model)
         </input>
+</program>
+<console>
         <output>
 ## 
 ## Call:
@@ -121,14 +125,14 @@ summary(model)
 ## -14.964  -4.989  -1.114   6.336  18.736 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)   
+##             Estimate Std. Error t value Pr(&gt;|t|)   
 ## (Intercept)   2.7639     0.9409   2.938  0.00446 **
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 7.984 on 71 degrees of freedom
         </output>
-      </program>
+      </console>
 
       <p>
         Notice that in both analyses the sample mean difference of <c>2.76</c>, the <em>t</em>-statistic of <c>2.94</c> with <c>71</c> degrees of freedom (df), and the <em>p</em>-value of <c>.004</c> are identical with respect to place of rounding.

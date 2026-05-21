@@ -24,13 +24,13 @@
     </p>
 
     <ol>
-      <li><p><c>tidyverse</c> : Data manipulation and visualization <xref ref="ref-wickham-tidyverse"/></p></li>
-      <li><p><c>psych</c> : Descriptive statistics <xref ref="ref-revelle-psych"/></p></li>
-      <li><p><c>car</c> : Analysis of Variance (ANOVA) source table with sums of squares type III <xref ref="ref-fox-weisberg-book"/></p></li>
-      <li><p><c>knitr</c> : Nice, clean-looking tables <xref ref="ref-xie-knitr-package"/></p></li>
-      <li><p><c>carData</c> : Open access datasets <xref ref="ref-fox-weisberg-price"/></p></li>
-      <li><p><c>MASS</c> : Additional open access datasets <xref ref="ref-venables-ripley"/></p></li>
-      <li><p><c>scales</c>: Convert numbers into dollars <xref ref="ref-wickham-scales"/></p></li>
+      <li><p><c>tidyverse</c> : Data manipulation and visualization</p></li>
+      <li><p><c>psych</c> : Descriptive statistics</p></li>
+      <li><p><c>car</c> : Analysis of Variance (ANOVA) source table with sums of squares type III</p></li>
+      <li><p><c>knitr</c> : Nice, clean-looking tables</p></li>
+      <li><p><c>carData</c> : Open access datasets</p></li>
+      <li><p><c>MASS</c> : Additional open access datasets</p></li>
+      <li><p><c>scales</c>: Convert numbers into dollars</p></li>
     </ol>
 
     <p>
